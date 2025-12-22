@@ -54,24 +54,36 @@ export default function AdminSidebar() {
         padding: '0 24px 32px',
         borderBottom: '1px solid rgba(255,255,255,0.08)'
       }}>
-        <Link href="/admin" style={{
-          fontFamily: 'var(--font-playfair), Georgia, serif',
-          fontSize: '20px',
-          color: '#fff',
-          letterSpacing: '0.15em',
-          textTransform: 'uppercase',
-          textDecoration: 'none'
-        }}>
-          COACH
+        <Link href="/admin" style={{ textDecoration: 'none' }}>
+          <span style={{
+            fontFamily: 'var(--font-playfair), Georgia, serif',
+            fontSize: '20px',
+            color: '#fff',
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            display: 'block'
+          }}>
+            COACH
+          </span>
+          <span style={{
+            fontSize: '10px',
+            color: '#a1a1a6',
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase'
+          }}>
+            Luxe Boutique
+          </span>
         </Link>
         <span style={{
           display: 'block',
-          fontSize: '11px',
+          fontSize: '10px',
           color: '#6e6e73',
           letterSpacing: '0.1em',
-          marginTop: '4px'
+          marginTop: '8px',
+          paddingTop: '8px',
+          borderTop: '1px solid rgba(255,255,255,0.08)'
         }}>
-          ADMIN PANEL
+          Admin Panel
         </span>
       </div>
 
