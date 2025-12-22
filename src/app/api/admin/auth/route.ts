@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createHash } from 'crypto';
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'coach2024';
 const SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 hours
 
 function generateSessionToken(password: string): string {
