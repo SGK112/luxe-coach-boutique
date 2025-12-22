@@ -101,16 +101,32 @@ export default function CheckoutPage() {
             <ArrowLeft style={{ width: '18px', height: '18px' }} />
             Back to Shopping
           </Link>
-          <Link href="/" style={{
-            fontFamily: 'var(--font-playfair), Georgia, serif',
-            fontSize: '24px',
-            letterSpacing: '0.15em',
-            textTransform: 'uppercase',
-            color: '#1d1d1f',
-            textDecoration: 'none'
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px'
           }}>
-            COACH
-          </Link>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              backgroundColor: '#1d1d1f',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <Lock style={{ width: '18px', height: '18px', color: '#fff' }} />
+            </div>
+            <span style={{
+              fontFamily: 'var(--font-playfair), Georgia, serif',
+              fontSize: '20px',
+              fontWeight: 400,
+              color: '#1d1d1f',
+              letterSpacing: '0.05em'
+            }}>
+              Checkout
+            </span>
+          </div>
           <div style={{
             display: 'flex',
             alignItems: 'center',
