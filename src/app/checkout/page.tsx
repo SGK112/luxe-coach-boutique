@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronLeft, Lock, CreditCard, Truck } from 'lucide-react';
+import { ArrowLeft, Lock, CreditCard, Truck, Check, ShieldCheck, Package } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 
 export default function CheckoutPage() {
@@ -15,12 +15,59 @@ export default function CheckoutPage() {
   const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
 
+  const steps = [
+    { number: 1, label: 'Shipping' },
+    { number: 2, label: 'Payment' },
+    { number: 3, label: 'Review' },
+  ];
+
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-light mb-4">Your bag is empty</h1>
-          <Link href="/products" className="btn btn-primary">
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fafafa'
+      }}>
+        <div style={{ textAlign: 'center', padding: '48px' }}>
+          <div style={{
+            width: '80px',
+            height: '80px',
+            borderRadius: '50%',
+            backgroundColor: '#f5f5f7',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 24px'
+          }}>
+            <Package style={{ width: '32px', height: '32px', color: '#86868b' }} />
+          </div>
+          <h1 style={{
+            fontFamily: 'var(--font-playfair), Georgia, serif',
+            fontSize: '28px',
+            fontWeight: 400,
+            color: '#1d1d1f',
+            marginBottom: '12px'
+          }}>
+            Your bag is empty
+          </h1>
+          <p style={{ fontSize: '15px', color: '#86868b', marginBottom: '32px' }}>
+            Add some items to get started
+          </p>
+          <Link
+            href="/products"
+            style={{
+              display: 'inline-block',
+              padding: '16px 40px',
+              backgroundColor: '#1d1d1f',
+              color: '#fff',
+              borderRadius: '28px',
+              fontSize: '14px',
+              fontWeight: 500,
+              textDecoration: 'none'
+            }}
+          >
             Continue Shopping
           </Link>
         </div>
@@ -29,144 +76,273 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div style={{ minHeight: '100vh', backgroundColor: '#fafafa' }}>
       {/* Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link
-              href="/products"
-              className="flex items-center gap-2 text-sm text-gray-600 hover:text-black"
-            >
-              <ChevronLeft className="w-4 h-4" />
-              Continue Shopping
-            </Link>
-            <h1 className="text-xl font-light tracking-wider">
-              Luxe<span className="font-semibold">Coach</span>
-            </h1>
-            <div className="flex items-center gap-1 text-sm text-gray-600">
-              <Lock className="w-4 h-4" />
-              Secure Checkout
-            </div>
+      <div style={{ backgroundColor: '#fff', borderBottom: '1px solid #f0f0f0' }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '20px 24px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}>
+          <Link
+            href="/products"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontSize: '14px',
+              color: '#86868b',
+              textDecoration: 'none'
+            }}
+          >
+            <ArrowLeft style={{ width: '18px', height: '18px' }} />
+            Back to Shopping
+          </Link>
+          <Link href="/" style={{
+            fontFamily: 'var(--font-playfair), Georgia, serif',
+            fontSize: '24px',
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            color: '#1d1d1f',
+            textDecoration: 'none'
+          }}>
+            COACH
+          </Link>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '13px',
+            color: '#86868b'
+          }}>
+            <Lock style={{ width: '14px', height: '14px' }} />
+            Secure Checkout
           </div>
         </div>
       </div>
 
       {/* Progress Steps */}
-      <div className="bg-white border-b">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-center gap-4">
-            {['Shipping', 'Payment', 'Review'].map((s, i) => (
-              <div key={s} className="flex items-center gap-2">
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm ${
-                    step > i + 1
-                      ? 'bg-green-600 text-white'
-                      : step === i + 1
-                      ? 'bg-black text-white'
-                      : 'bg-gray-200 text-gray-500'
-                  }`}
-                >
-                  {step > i + 1 ? '✓' : i + 1}
+      <div style={{ backgroundColor: '#fff', borderBottom: '1px solid #f0f0f0' }}>
+        <div style={{
+          maxWidth: '600px',
+          margin: '0 auto',
+          padding: '24px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          {steps.map((s, i) => (
+            <div key={s.number} style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  backgroundColor: step > s.number ? '#16a34a' : step === s.number ? '#1d1d1f' : '#f5f5f7',
+                  color: step >= s.number ? '#fff' : '#86868b',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '14px',
+                  fontWeight: 500
+                }}>
+                  {step > s.number ? <Check style={{ width: '18px', height: '18px' }} /> : s.number}
                 </div>
-                <span
-                  className={`text-sm ${
-                    step === i + 1 ? 'font-medium' : 'text-gray-500'
-                  }`}
-                >
-                  {s}
+                <span style={{
+                  fontSize: '14px',
+                  fontWeight: step === s.number ? 500 : 400,
+                  color: step === s.number ? '#1d1d1f' : '#86868b'
+                }}>
+                  {s.label}
                 </span>
-                {i < 2 && (
-                  <div className="w-12 h-px bg-gray-300 mx-2 hidden sm:block" />
-                )}
               </div>
-            ))}
-          </div>
+              {i < steps.length - 1 && (
+                <div style={{
+                  width: '60px',
+                  height: '2px',
+                  backgroundColor: step > s.number ? '#16a34a' : '#e5e5e5',
+                  margin: '0 16px'
+                }} />
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="grid lg:grid-cols-3 gap-8">
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '40px 24px'
+      }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          gap: '32px'
+        }} className="checkout-grid">
           {/* Form Section */}
-          <div className="lg:col-span-2 space-y-6">
+          <div>
             {step === 1 && (
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h2 className="text-lg font-medium mb-6 flex items-center gap-2">
-                  <Truck className="w-5 h-5" />
-                  Shipping Information
-                </h2>
-                <form className="space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
+              <div style={{
+                backgroundColor: '#fff',
+                borderRadius: '16px',
+                padding: '32px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.04)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '32px' }}>
+                  <div style={{
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '50%',
+                    backgroundColor: '#f5f5f7',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <Truck style={{ width: '20px', height: '20px', color: '#1d1d1f' }} />
+                  </div>
+                  <h2 style={{
+                    fontFamily: 'var(--font-playfair), Georgia, serif',
+                    fontSize: '22px',
+                    fontWeight: 400,
+                    color: '#1d1d1f'
+                  }}>
+                    Shipping Information
+                  </h2>
+                </div>
+                <form style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                     <div>
-                      <label className="block text-sm font-medium mb-1">
+                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: '#1d1d1f', marginBottom: '8px' }}>
                         First Name
                       </label>
                       <input
                         type="text"
-                        className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                        style={{
+                          width: '100%',
+                          height: '52px',
+                          padding: '0 20px',
+                          border: '1px solid #e5e5e5',
+                          borderRadius: '12px',
+                          fontSize: '15px',
+                          outline: 'none',
+                          transition: 'border-color 0.2s'
+                        }}
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-1">
+                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: '#1d1d1f', marginBottom: '8px' }}>
                         Last Name
                       </label>
                       <input
                         type="text"
-                        className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                        style={{
+                          width: '100%',
+                          height: '52px',
+                          padding: '0 20px',
+                          border: '1px solid #e5e5e5',
+                          borderRadius: '12px',
+                          fontSize: '15px',
+                          outline: 'none'
+                        }}
                         required
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-1">
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: '#1d1d1f', marginBottom: '8px' }}>
                       Email
                     </label>
                     <input
                       type="email"
-                      className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                      style={{
+                        width: '100%',
+                        height: '52px',
+                        padding: '0 20px',
+                        border: '1px solid #e5e5e5',
+                        borderRadius: '12px',
+                        fontSize: '15px',
+                        outline: 'none'
+                      }}
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-1">
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: '#1d1d1f', marginBottom: '8px' }}>
                       Address
                     </label>
                     <input
                       type="text"
-                      className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                      style={{
+                        width: '100%',
+                        height: '52px',
+                        padding: '0 20px',
+                        border: '1px solid #e5e5e5',
+                        borderRadius: '12px',
+                        fontSize: '15px',
+                        outline: 'none'
+                      }}
                       required
                     />
                   </div>
-                  <div className="grid sm:grid-cols-3 gap-4">
-                    <div className="sm:col-span-1">
-                      <label className="block text-sm font-medium mb-1">
+                  <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '16px' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: '#1d1d1f', marginBottom: '8px' }}>
                         City
                       </label>
                       <input
                         type="text"
-                        className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                        style={{
+                          width: '100%',
+                          height: '52px',
+                          padding: '0 20px',
+                          border: '1px solid #e5e5e5',
+                          borderRadius: '12px',
+                          fontSize: '15px',
+                          outline: 'none'
+                        }}
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-1">
+                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: '#1d1d1f', marginBottom: '8px' }}>
                         State
                       </label>
-                      <select className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black">
-                        <option>Select</option>
+                      <select style={{
+                        width: '100%',
+                        height: '52px',
+                        padding: '0 16px',
+                        border: '1px solid #e5e5e5',
+                        borderRadius: '12px',
+                        fontSize: '15px',
+                        outline: 'none',
+                        backgroundColor: '#fff',
+                        cursor: 'pointer'
+                      }}>
                         <option>CA</option>
                         <option>NY</option>
                         <option>TX</option>
+                        <option>FL</option>
                       </select>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-1">
+                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: '#1d1d1f', marginBottom: '8px' }}>
                         ZIP
                       </label>
                       <input
                         type="text"
-                        className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                        style={{
+                          width: '100%',
+                          height: '52px',
+                          padding: '0 20px',
+                          border: '1px solid #e5e5e5',
+                          borderRadius: '12px',
+                          fontSize: '15px',
+                          outline: 'none'
+                        }}
                         required
                       />
                     </div>
@@ -174,7 +350,17 @@ export default function CheckoutPage() {
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="w-full btn btn-primary mt-4"
+                    style={{
+                      height: '56px',
+                      backgroundColor: '#1d1d1f',
+                      color: '#fff',
+                      border: 'none',
+                      borderRadius: '28px',
+                      fontSize: '15px',
+                      fontWeight: 500,
+                      cursor: 'pointer',
+                      marginTop: '12px'
+                    }}
                   >
                     Continue to Payment
                   </button>
@@ -183,59 +369,138 @@ export default function CheckoutPage() {
             )}
 
             {step === 2 && (
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h2 className="text-lg font-medium mb-6 flex items-center gap-2">
-                  <CreditCard className="w-5 h-5" />
-                  Payment Method
-                </h2>
-                <form className="space-y-4">
+              <div style={{
+                backgroundColor: '#fff',
+                borderRadius: '16px',
+                padding: '32px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.04)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '32px' }}>
+                  <div style={{
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '50%',
+                    backgroundColor: '#f5f5f7',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <CreditCard style={{ width: '20px', height: '20px', color: '#1d1d1f' }} />
+                  </div>
+                  <h2 style={{
+                    fontFamily: 'var(--font-playfair), Georgia, serif',
+                    fontSize: '22px',
+                    fontWeight: 400,
+                    color: '#1d1d1f'
+                  }}>
+                    Payment Method
+                  </h2>
+                </div>
+                <form style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                   <div>
-                    <label className="block text-sm font-medium mb-1">
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: '#1d1d1f', marginBottom: '8px' }}>
                       Card Number
                     </label>
                     <input
                       type="text"
                       placeholder="1234 5678 9012 3456"
-                      className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                      style={{
+                        width: '100%',
+                        height: '52px',
+                        padding: '0 20px',
+                        border: '1px solid #e5e5e5',
+                        borderRadius: '12px',
+                        fontSize: '15px',
+                        outline: 'none'
+                      }}
                       required
                     />
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                     <div>
-                      <label className="block text-sm font-medium mb-1">
+                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: '#1d1d1f', marginBottom: '8px' }}>
                         Expiry Date
                       </label>
                       <input
                         type="text"
                         placeholder="MM/YY"
-                        className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                        style={{
+                          width: '100%',
+                          height: '52px',
+                          padding: '0 20px',
+                          border: '1px solid #e5e5e5',
+                          borderRadius: '12px',
+                          fontSize: '15px',
+                          outline: 'none'
+                        }}
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-1">
+                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: '#1d1d1f', marginBottom: '8px' }}>
                         CVV
                       </label>
                       <input
                         type="text"
                         placeholder="123"
-                        className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                        style={{
+                          width: '100%',
+                          height: '52px',
+                          padding: '0 20px',
+                          border: '1px solid #e5e5e5',
+                          borderRadius: '12px',
+                          fontSize: '15px',
+                          outline: 'none'
+                        }}
                         required
                       />
                     </div>
                   </div>
-                  <div className="flex gap-4 pt-4">
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '16px',
+                    backgroundColor: '#f0fdf4',
+                    borderRadius: '12px'
+                  }}>
+                    <ShieldCheck style={{ width: '18px', height: '18px', color: '#16a34a' }} />
+                    <span style={{ fontSize: '13px', color: '#16a34a' }}>
+                      Your payment info is secure and encrypted
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', gap: '12px', marginTop: '12px' }}>
                     <button
                       type="button"
                       onClick={() => setStep(1)}
-                      className="flex-1 btn btn-outline"
+                      style={{
+                        flex: 1,
+                        height: '56px',
+                        backgroundColor: 'transparent',
+                        color: '#1d1d1f',
+                        border: '1px solid #1d1d1f',
+                        borderRadius: '28px',
+                        fontSize: '15px',
+                        fontWeight: 500,
+                        cursor: 'pointer'
+                      }}
                     >
                       Back
                     </button>
                     <button
                       type="button"
                       onClick={() => setStep(3)}
-                      className="flex-1 btn btn-primary"
+                      style={{
+                        flex: 2,
+                        height: '56px',
+                        backgroundColor: '#1d1d1f',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '28px',
+                        fontSize: '15px',
+                        fontWeight: 500,
+                        cursor: 'pointer'
+                      }}
                     >
                       Review Order
                     </button>
@@ -245,46 +510,101 @@ export default function CheckoutPage() {
             )}
 
             {step === 3 && (
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h2 className="text-lg font-medium mb-6">Review Your Order</h2>
-                <div className="space-y-4">
-                  {cart.map((item) => (
+              <div style={{
+                backgroundColor: '#fff',
+                borderRadius: '16px',
+                padding: '32px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.04)'
+              }}>
+                <h2 style={{
+                  fontFamily: 'var(--font-playfair), Georgia, serif',
+                  fontSize: '22px',
+                  fontWeight: 400,
+                  color: '#1d1d1f',
+                  marginBottom: '24px'
+                }}>
+                  Review Your Order
+                </h2>
+                <div>
+                  {cart.map((item, index) => (
                     <div
                       key={`${item.product.id}-${item.selectedColor.name}`}
-                      className="flex gap-4 pb-4 border-b last:border-0"
+                      style={{
+                        display: 'flex',
+                        gap: '16px',
+                        paddingBottom: index < cart.length - 1 ? '20px' : 0,
+                        marginBottom: index < cart.length - 1 ? '20px' : 0,
+                        borderBottom: index < cart.length - 1 ? '1px solid #f0f0f0' : 'none'
+                      }}
                     >
-                      <div className="relative w-20 h-20 bg-gray-100 rounded overflow-hidden flex-shrink-0">
+                      <div style={{
+                        position: 'relative',
+                        width: '80px',
+                        height: '100px',
+                        backgroundColor: '#f8f8f8',
+                        borderRadius: '8px',
+                        overflow: 'hidden',
+                        flexShrink: 0
+                      }}>
                         <Image
                           src={item.product.images[0]}
                           alt={item.product.name}
                           fill
-                          className="object-cover"
+                          style={{ objectFit: 'cover' }}
                         />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="font-medium text-sm">{item.product.name}</h3>
-                        <p className="text-xs text-gray-500">
-                          Color: {item.selectedColor.name} | Qty: {item.quantity}
+                      <div style={{ flex: 1 }}>
+                        <h3 style={{
+                          fontFamily: 'var(--font-playfair), Georgia, serif',
+                          fontSize: '15px',
+                          fontWeight: 400,
+                          color: '#1d1d1f',
+                          marginBottom: '4px'
+                        }}>
+                          {item.product.name}
+                        </h3>
+                        <p style={{ fontSize: '13px', color: '#86868b', marginBottom: '8px' }}>
+                          {item.selectedColor.name} &middot; Qty: {item.quantity}
                         </p>
-                        <p className="font-medium mt-1">
+                        <p style={{ fontSize: '15px', fontWeight: 500, color: '#1d1d1f' }}>
                           ${(item.product.price * item.quantity).toFixed(2)}
                         </p>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="flex gap-4 pt-6">
+                <div style={{ display: 'flex', gap: '12px', marginTop: '32px' }}>
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="flex-1 btn btn-outline"
+                    style={{
+                      flex: 1,
+                      height: '56px',
+                      backgroundColor: 'transparent',
+                      color: '#1d1d1f',
+                      border: '1px solid #1d1d1f',
+                      borderRadius: '28px',
+                      fontSize: '15px',
+                      fontWeight: 500,
+                      cursor: 'pointer'
+                    }}
                   >
                     Back
                   </button>
                   <button
                     type="button"
-                    className="flex-1 btn btn-gold"
                     onClick={() => alert('Order placed! (Demo)')}
+                    style={{
+                      flex: 2,
+                      height: '56px',
+                      backgroundColor: '#1d1d1f',
+                      color: '#fff',
+                      border: 'none',
+                      borderRadius: '28px',
+                      fontSize: '15px',
+                      fontWeight: 500,
+                      cursor: 'pointer'
+                    }}
                   >
                     Place Order
                   </button>
@@ -294,46 +614,83 @@ export default function CheckoutPage() {
           </div>
 
           {/* Order Summary */}
-          <div className="lg:col-span-1">
-            <div className="bg-white p-6 rounded-lg shadow-sm sticky top-24">
-              <h2 className="text-lg font-medium mb-4">Order Summary</h2>
-              <div className="space-y-3 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">
-                    Subtotal ({cart.length} items)
+          <div>
+            <div style={{
+              backgroundColor: '#fff',
+              borderRadius: '16px',
+              padding: '28px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+              position: 'sticky',
+              top: '24px'
+            }}>
+              <h2 style={{
+                fontFamily: 'var(--font-playfair), Georgia, serif',
+                fontSize: '18px',
+                fontWeight: 400,
+                color: '#1d1d1f',
+                marginBottom: '24px'
+              }}>
+                Order Summary
+              </h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
+                  <span style={{ color: '#86868b' }}>Subtotal ({cart.length} items)</span>
+                  <span style={{ color: '#1d1d1f' }}>${subtotal.toFixed(2)}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
+                  <span style={{ color: '#86868b' }}>Shipping</span>
+                  <span style={{ color: shipping === 0 ? '#16a34a' : '#1d1d1f', fontWeight: shipping === 0 ? 500 : 400 }}>
+                    {shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}
                   </span>
-                  <span>${subtotal.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Shipping</span>
-                  <span>
-                    {shipping === 0 ? (
-                      <span className="text-green-600">FREE</span>
-                    ) : (
-                      `$${shipping.toFixed(2)}`
-                    )}
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
+                  <span style={{ color: '#86868b' }}>Tax</span>
+                  <span style={{ color: '#1d1d1f' }}>${tax.toFixed(2)}</span>
+                </div>
+                <div style={{
+                  borderTop: '1px solid #f0f0f0',
+                  paddingTop: '16px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}>
+                  <span style={{ fontSize: '15px', fontWeight: 500, color: '#1d1d1f' }}>Total</span>
+                  <span style={{
+                    fontFamily: 'var(--font-playfair), Georgia, serif',
+                    fontSize: '22px',
+                    fontWeight: 400,
+                    color: '#1d1d1f'
+                  }}>
+                    ${total.toFixed(2)}
                   </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Estimated Tax</span>
-                  <span>${tax.toFixed(2)}</span>
-                </div>
-                <div className="border-t pt-3 flex justify-between font-semibold text-lg">
-                  <span>Total</span>
-                  <span>${total.toFixed(2)}</span>
                 </div>
               </div>
 
               {shipping > 0 && (
-                <div className="mt-4 p-3 bg-gray-50 rounded text-sm text-center">
-                  Add ${(150 - subtotal).toFixed(2)} more for{' '}
-                  <span className="font-medium">FREE shipping</span>
+                <div style={{
+                  marginTop: '20px',
+                  padding: '16px',
+                  backgroundColor: '#fafafa',
+                  borderRadius: '12px',
+                  textAlign: 'center'
+                }}>
+                  <p style={{ fontSize: '13px', color: '#86868b' }}>
+                    Add <strong style={{ color: '#1d1d1f' }}>${(150 - subtotal).toFixed(2)}</strong> for free shipping
+                  </p>
                 </div>
               )}
             </div>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @media (min-width: 1024px) {
+          .checkout-grid {
+            grid-template-columns: 1fr 380px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
