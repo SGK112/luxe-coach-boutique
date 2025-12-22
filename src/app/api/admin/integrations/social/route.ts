@@ -1,35 +1,21 @@
 import { NextResponse } from 'next/server';
 
-interface PlatformStatus {
-  connected: boolean;
-  accountName?: string;
-}
-
 export async function GET() {
   // Check which social platforms have credentials configured
-  const platforms: Record<string, PlatformStatus> = {
-    instagram: {
-      connected: !!(process.env.INSTAGRAM_ACCESS_TOKEN && process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID),
-    },
-    facebook: {
-      connected: !!(process.env.FACEBOOK_PAGE_ID && process.env.FACEBOOK_ACCESS_TOKEN),
-    },
-    twitter: {
-      connected: !!(
-        process.env.TWITTER_API_KEY &&
-        process.env.TWITTER_API_SECRET &&
-        process.env.TWITTER_ACCESS_TOKEN
-      ),
-    },
-    tiktok: {
-      connected: !!(process.env.TIKTOK_ACCESS_TOKEN && process.env.TIKTOK_OPEN_ID),
-    },
-    pinterest: {
-      connected: !!(process.env.PINTEREST_ACCESS_TOKEN),
-    },
+  const platforms: Record<string, 'connected' | 'disconnected'> = {
+    instagram: (process.env.INSTAGRAM_ACCESS_TOKEN && process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID)
+      ? 'connected' : 'disconnected',
+    facebook: (process.env.FACEBOOK_PAGE_ID && process.env.FACEBOOK_ACCESS_TOKEN)
+      ? 'connected' : 'disconnected',
+    twitter: (process.env.TWITTER_API_KEY && process.env.TWITTER_API_SECRET && process.env.TWITTER_ACCESS_TOKEN)
+      ? 'connected' : 'disconnected',
+    tiktok: (process.env.TIKTOK_ACCESS_TOKEN && process.env.TIKTOK_OPEN_ID)
+      ? 'connected' : 'disconnected',
+    pinterest: process.env.PINTEREST_ACCESS_TOKEN
+      ? 'connected' : 'disconnected',
   };
 
-  const connectedCount = Object.values(platforms).filter(p => p.connected).length;
+  const connectedCount = Object.values(platforms).filter(p => p === 'connected').length;
 
   return NextResponse.json({
     platforms,
