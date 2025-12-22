@@ -8,6 +8,7 @@ const ALLOWED_ADMIN_EMAILS = [
 ];
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  trustHost: true,
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
