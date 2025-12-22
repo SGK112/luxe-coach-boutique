@@ -1,12 +1,6 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 
-// Define allowed admin emails - add your email(s) here
-const ALLOWED_ADMIN_EMAILS = [
-  "joshb@surprisegranite.com",
-  "help.remodely@gmail.com",
-];
-
 export const { handlers, signIn, signOut, auth } = NextAuth({
   trustHost: true,
   providers: [
@@ -20,12 +14,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     error: "/admin/login",
   },
   callbacks: {
-    async signIn({ user }) {
-      // Only allow specific emails to sign in
-      if (user.email && ALLOWED_ADMIN_EMAILS.includes(user.email)) {
-        return true;
-      }
-      return false;
+    async signIn() {
+      // Allow any Google account to sign in
+      return true;
     },
     async session({ session, token }) {
       // Add user info to session
