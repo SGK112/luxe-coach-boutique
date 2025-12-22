@@ -19,70 +19,131 @@ const helpLinks = [
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: '#000', color: '#fff' }}>
+    <footer style={{ backgroundColor: '#1d1d1f', color: '#fff' }}>
       {/* Newsletter */}
-      <div style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-        <div className="container-main" style={{ padding: '48px 16px', textAlign: 'center' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: 300, marginBottom: '8px' }}>Join Our Newsletter</h3>
-          <p style={{ fontSize: '13px', color: '#999', marginBottom: '24px' }}>
+      <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <div className="container-main" style={{ padding: '64px 20px', textAlign: 'center' }}>
+          <h3 style={{
+            fontFamily: 'var(--font-playfair), Georgia, serif',
+            fontSize: '24px',
+            fontWeight: 400,
+            marginBottom: '12px'
+          }}>
+            Join Our Newsletter
+          </h3>
+          <p style={{ fontSize: '14px', color: '#86868b', marginBottom: '32px' }}>
             Be the first to know about new arrivals and exclusive offers.
           </p>
-          <form style={{ display: 'flex', gap: '8px', maxWidth: '400px', margin: '0 auto' }}>
+          <form style={{
+            display: 'flex',
+            gap: '12px',
+            maxWidth: '460px',
+            margin: '0 auto',
+            flexWrap: 'wrap',
+            justifyContent: 'center'
+          }}>
             <input
               type="email"
               placeholder="Enter your email"
               style={{
-                flex: 1, height: '44px', padding: '0 16px',
-                backgroundColor: 'transparent', border: '1px solid rgba(255,255,255,0.3)',
-                color: '#fff', fontSize: '13px'
+                flex: '1 1 280px',
+                height: '52px',
+                padding: '0 20px',
+                backgroundColor: 'rgba(255,255,255,0.08)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                borderRadius: '26px',
+                color: '#fff',
+                fontSize: '14px',
+                outline: 'none'
               }}
             />
             <button
               type="submit"
               style={{
-                height: '44px', padding: '0 24px',
-                backgroundColor: '#fff', color: '#000',
-                border: 'none', fontSize: '11px', letterSpacing: '0.1em',
-                textTransform: 'uppercase', fontWeight: 500, cursor: 'pointer'
+                height: '52px',
+                padding: '0 32px',
+                backgroundColor: '#fff',
+                color: '#1d1d1f',
+                border: 'none',
+                borderRadius: '26px',
+                fontSize: '12px',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                fontWeight: 500,
+                cursor: 'pointer'
               }}
             >
-              Join
+              Subscribe
             </button>
           </form>
         </div>
       </div>
 
       {/* Links */}
-      <div className="container-main" style={{ padding: '48px 16px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '32px' }}>
+      <div className="container-main" style={{ padding: '64px 20px' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+          gap: '40px'
+        }}>
           {/* Brand */}
           <div>
-            <Link href="/" style={{ fontSize: '20px', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 300 }}>
+            <Link href="/" style={{
+              fontFamily: 'var(--font-playfair), Georgia, serif',
+              fontSize: '24px',
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              fontWeight: 400
+            }}>
               COACH
             </Link>
-            <p style={{ fontSize: '13px', color: '#999', marginTop: '16px', marginBottom: '24px' }}>
-              Curating the finest designer handbags.
+            <p style={{
+              fontSize: '14px',
+              color: '#86868b',
+              marginTop: '20px',
+              marginBottom: '28px',
+              lineHeight: 1.6
+            }}>
+              Curating the finest designer handbags since 1941.
             </p>
             <div style={{ display: 'flex', gap: '12px' }}>
-              <a href="#" style={{ width: '36px', height: '36px', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Instagram style={{ width: '16px', height: '16px' }} />
-              </a>
-              <a href="#" style={{ width: '36px', height: '36px', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Facebook style={{ width: '16px', height: '16px' }} />
-              </a>
-              <a href="#" style={{ width: '36px', height: '36px', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Twitter style={{ width: '16px', height: '16px' }} />
-              </a>
+              {[Instagram, Facebook, Twitter].map((Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  style={{
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '50%',
+                    backgroundColor: 'rgba(255,255,255,0.08)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
+                  <Icon style={{ width: '18px', height: '18px', color: '#fff' }} />
+                </a>
+              ))}
             </div>
           </div>
 
           {/* Shop */}
           <div>
-            <h4 style={{ fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 500, marginBottom: '16px' }}>Shop</h4>
+            <h4 style={{
+              fontSize: '12px',
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              fontWeight: 500,
+              marginBottom: '24px'
+            }}>
+              Shop
+            </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {shopLinks.map((link) => (
-                <li key={link.name} style={{ marginBottom: '12px' }}>
-                  <Link href={link.href} style={{ fontSize: '13px', color: '#999' }}>{link.name}</Link>
+                <li key={link.name} style={{ marginBottom: '16px' }}>
+                  <Link href={link.href} style={{ fontSize: '14px', color: '#86868b' }}>
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -90,11 +151,21 @@ export default function Footer() {
 
           {/* Help */}
           <div>
-            <h4 style={{ fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 500, marginBottom: '16px' }}>Help</h4>
+            <h4 style={{
+              fontSize: '12px',
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              fontWeight: 500,
+              marginBottom: '24px'
+            }}>
+              Help
+            </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {helpLinks.map((link) => (
-                <li key={link.name} style={{ marginBottom: '12px' }}>
-                  <Link href={link.href} style={{ fontSize: '13px', color: '#999' }}>{link.name}</Link>
+                <li key={link.name} style={{ marginBottom: '16px' }}>
+                  <Link href={link.href} style={{ fontSize: '14px', color: '#86868b' }}>
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -102,22 +173,47 @@ export default function Footer() {
 
           {/* About */}
           <div>
-            <h4 style={{ fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 500, marginBottom: '16px' }}>About</h4>
+            <h4 style={{
+              fontSize: '12px',
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              fontWeight: 500,
+              marginBottom: '24px'
+            }}>
+              About
+            </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              <li style={{ marginBottom: '12px' }}><Link href="/about" style={{ fontSize: '13px', color: '#999' }}>Our Story</Link></li>
-              <li style={{ marginBottom: '12px' }}><Link href="/sustainability" style={{ fontSize: '13px', color: '#999' }}>Sustainability</Link></li>
+              <li style={{ marginBottom: '16px' }}>
+                <Link href="/about" style={{ fontSize: '14px', color: '#86868b' }}>Our Story</Link>
+              </li>
+              <li style={{ marginBottom: '16px' }}>
+                <Link href="/sustainability" style={{ fontSize: '14px', color: '#86868b' }}>Sustainability</Link>
+              </li>
+              <li style={{ marginBottom: '16px' }}>
+                <Link href="/careers" style={{ fontSize: '14px', color: '#86868b' }}>Careers</Link>
+              </li>
             </ul>
           </div>
         </div>
       </div>
 
       {/* Bottom */}
-      <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-        <div className="container-main" style={{ padding: '24px 16px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
-          <p style={{ fontSize: '11px', color: '#666' }}>&copy; {new Date().getFullYear()} Coach. All rights reserved.</p>
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <Link href="/privacy" style={{ fontSize: '11px', color: '#666' }}>Privacy</Link>
-            <Link href="/terms" style={{ fontSize: '11px', color: '#666' }}>Terms</Link>
+      <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+        <div className="container-main" style={{
+          padding: '24px 20px',
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: '16px'
+        }}>
+          <p style={{ fontSize: '12px', color: '#86868b' }}>
+            &copy; {new Date().getFullYear()} Coach. All rights reserved.
+          </p>
+          <div style={{ display: 'flex', gap: '24px' }}>
+            <Link href="/privacy" style={{ fontSize: '12px', color: '#86868b' }}>Privacy</Link>
+            <Link href="/terms" style={{ fontSize: '12px', color: '#86868b' }}>Terms</Link>
+            <Link href="/accessibility" style={{ fontSize: '12px', color: '#86868b' }}>Accessibility</Link>
           </div>
         </div>
       </div>

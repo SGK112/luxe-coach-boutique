@@ -1,26 +1,31 @@
 import { Product, Category, Review } from '@/types';
 
-export const categories: Category[] = [
-  { id: '1', name: 'Shoulder Bags', slug: 'shoulder-bags', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800' },
-  { id: '2', name: 'Tote Bags', slug: 'tote-bags', image: 'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=800' },
-  { id: '3', name: 'Crossbody Bags', slug: 'crossbody-bags', image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800' },
-  { id: '4', name: 'Satchels', slug: 'satchels', image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800' },
-];
-
-// Clean product images on white/neutral backgrounds
+// Premium product images on clean white/neutral backgrounds
 const productImages = {
-  shoulder1: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&q=90',
-  shoulder2: 'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=800&q=90',
-  tote1: 'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=800&q=90',
-  crossbody1: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=90',
-  satchel1: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=90',
-  bag1: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=800&q=90',
-  bag2: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=90',
-  bag3: 'https://images.unsplash.com/photo-1575032617751-6ddec2089882?w=800&q=90',
+  // Shoulder bags - clean studio shots
+  shoulder1: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=90&fit=crop',
+  shoulder2: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=90&fit=crop',
+  shoulder3: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&q=90&fit=crop',
+  // Tote bags
+  tote1: 'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=800&q=90&fit=crop',
+  tote2: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=90&fit=crop',
+  // Crossbody
+  crossbody1: 'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=800&q=90&fit=crop',
+  crossbody2: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=800&q=90&fit=crop',
+  // Satchels
+  satchel1: 'https://images.unsplash.com/photo-1575032617751-6ddec2089882?w=800&q=90&fit=crop',
+  satchel2: 'https://images.unsplash.com/photo-1614179689702-355944cd0918?w=800&q=90&fit=crop',
 };
 
+export const categories: Category[] = [
+  { id: '1', name: 'Shoulder Bags', slug: 'shoulder-bags', image: productImages.shoulder1 },
+  { id: '2', name: 'Tote Bags', slug: 'tote-bags', image: productImages.tote1 },
+  { id: '3', name: 'Crossbody Bags', slug: 'crossbody-bags', image: productImages.crossbody1 },
+  { id: '4', name: 'Satchels', slug: 'satchels', image: productImages.satchel1 },
+];
+
 export const products: Product[] = [
-  // Row 1-5: Shoulder Bags
+  // Shoulder Bags
   {
     id: '1',
     name: 'Brooklyn Shoulder Bag 28',
@@ -64,7 +69,7 @@ export const products: Product[] = [
     name: 'Soft Tabby Shoulder Bag',
     slug: 'soft-tabby-shoulder-bag',
     price: 495,
-    images: [productImages.bag1],
+    images: [productImages.shoulder3],
     colors: [
       { name: 'Black', hex: '#000000' },
       { name: 'Ivory', hex: '#FFFFF0' },
@@ -82,7 +87,7 @@ export const products: Product[] = [
     name: 'Ergo Shoulder Bag',
     slug: 'ergo-shoulder-bag',
     price: 350,
-    images: [productImages.shoulder1],
+    images: [productImages.crossbody2],
     colors: [
       { name: 'Pewter', hex: '#8E9196' },
       { name: 'Black', hex: '#000000' },
@@ -100,7 +105,7 @@ export const products: Product[] = [
     name: 'Pillow Tabby 26',
     slug: 'pillow-tabby-26',
     price: 550,
-    images: [productImages.bag3],
+    images: [productImages.satchel1],
     colors: [
       { name: 'Black', hex: '#000000' },
       { name: 'Pale Pistachio', hex: '#93C572' },
@@ -115,7 +120,7 @@ export const products: Product[] = [
     inStock: true,
   },
 
-  // Row 6-10: Crossbody Bags
+  // Crossbody Bags
   {
     id: '6',
     name: 'Studio Shoulder Bag',
@@ -139,7 +144,7 @@ export const products: Product[] = [
     slug: 'cassie-crossbody-19',
     price: 295,
     originalPrice: 395,
-    images: [productImages.bag1],
+    images: [productImages.crossbody2],
     colors: [
       { name: 'Vintage Mauve', hex: '#B784A7' },
       { name: 'Black', hex: '#000000' },
@@ -158,7 +163,7 @@ export const products: Product[] = [
     name: 'Bandit Crossbody',
     slug: 'bandit-crossbody',
     price: 325,
-    images: [productImages.crossbody1],
+    images: [productImages.shoulder1],
     colors: [
       { name: 'Black', hex: '#000000' },
       { name: 'Oxblood', hex: '#4A0000' },
@@ -176,7 +181,7 @@ export const products: Product[] = [
     name: 'Swinger 20',
     slug: 'swinger-20',
     price: 250,
-    images: [productImages.bag1],
+    images: [productImages.tote2],
     colors: [
       { name: 'Black', hex: '#000000' },
       { name: 'Saddle', hex: '#8B7355' },
@@ -207,7 +212,7 @@ export const products: Product[] = [
     inStock: true,
   },
 
-  // Row 11-15: Tote Bags
+  // Tote Bags
   {
     id: '11',
     name: 'Willow Tote',
@@ -233,7 +238,7 @@ export const products: Product[] = [
     name: 'City Tote',
     slug: 'city-tote',
     price: 350,
-    images: [productImages.tote1],
+    images: [productImages.tote2],
     colors: [
       { name: 'Black', hex: '#000000' },
       { name: 'Tan', hex: '#D2B48C' },
@@ -250,7 +255,7 @@ export const products: Product[] = [
     name: 'Central Tote With Zip',
     slug: 'central-tote-zip',
     price: 395,
-    images: [productImages.bag2],
+    images: [productImages.satchel2],
     colors: [
       { name: 'Black', hex: '#000000' },
       { name: 'Chalk', hex: '#F5F5DC' },
@@ -286,7 +291,7 @@ export const products: Product[] = [
     name: 'Mollie Tote',
     slug: 'mollie-tote',
     price: 278,
-    images: [productImages.bag2],
+    images: [productImages.crossbody1],
     colors: [
       { name: 'Black', hex: '#000000' },
       { name: 'Taupe', hex: '#483C32' },
@@ -300,7 +305,7 @@ export const products: Product[] = [
     inStock: true,
   },
 
-  // Row 16-20: Satchels & Special
+  // Satchels
   {
     id: '16',
     name: 'Rogue 25',
@@ -325,7 +330,7 @@ export const products: Product[] = [
     name: 'Grace Bag',
     slug: 'grace-bag',
     price: 595,
-    images: [productImages.satchel1],
+    images: [productImages.satchel2],
     colors: [
       { name: 'Black', hex: '#000000' },
       { name: 'Chalk', hex: '#F5F5DC' },
@@ -343,7 +348,7 @@ export const products: Product[] = [
     slug: 'ellie-satchel',
     price: 350,
     originalPrice: 450,
-    images: [productImages.bag3],
+    images: [productImages.shoulder3],
     colors: [
       { name: 'Black', hex: '#000000' },
       { name: 'Forest', hex: '#228B22' },
@@ -362,7 +367,7 @@ export const products: Product[] = [
     name: 'Charlie Bucket Bag',
     slug: 'charlie-bucket-bag',
     price: 375,
-    images: [productImages.bag1],
+    images: [productImages.crossbody2],
     colors: [
       { name: 'Black', hex: '#000000' },
       { name: 'Tan', hex: '#D2B48C' },

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ChevronRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import ProductCard from './ProductCard';
 import { products } from '@/data/products';
 
@@ -26,23 +26,44 @@ export default function FeaturedProducts({
     .slice(0, limit);
 
   return (
-    <section style={{ padding: '48px 0' }}>
+    <section style={{ padding: '80px 0' }}>
       <div className="container-main">
-        {/* Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px' }}>
-          <h2 style={{ fontSize: '20px', fontWeight: 300, letterSpacing: '0.02em' }}>
+        {/* Header - Minimalist */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'flex-end',
+          justifyContent: 'space-between',
+          marginBottom: '48px'
+        }}>
+          <h2 style={{
+            fontFamily: 'var(--font-playfair), Georgia, serif',
+            fontSize: 'clamp(24px, 4vw, 32px)',
+            fontWeight: 400,
+            letterSpacing: '0.02em',
+            color: '#1d1d1f'
+          }}>
             {title}
           </h2>
           <Link
             href={`/products${filter !== 'all' ? `?filter=${filter}` : ''}`}
-            style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 500 }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontSize: '13px',
+              letterSpacing: '0.05em',
+              fontWeight: 500,
+              color: '#1d1d1f',
+              paddingBottom: '4px',
+              borderBottom: '1px solid #1d1d1f'
+            }}
           >
             View All
-            <ChevronRight style={{ width: '16px', height: '16px' }} />
+            <ArrowRight style={{ width: '16px', height: '16px' }} />
           </Link>
         </div>
 
-        {/* Grid */}
+        {/* Product Grid */}
         <div className="product-grid">
           {filteredProducts.map((product, index) => (
             <ProductCard

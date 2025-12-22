@@ -56,25 +56,53 @@ function ProductsContent() {
   return (
     <div style={{ minHeight: '100vh' }}>
       {/* Header */}
-      <div style={{ backgroundColor: '#fafafa', padding: '40px 0', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '28px', fontWeight: 300, letterSpacing: '0.02em' }}>{getPageTitle()}</h1>
-        <p style={{ fontSize: '13px', color: '#666', marginTop: '8px' }}>{filteredProducts.length} Products</p>
+      <div style={{ backgroundColor: '#fafafa', padding: '60px 0', textAlign: 'center' }}>
+        <h1 style={{
+          fontFamily: 'var(--font-playfair), Georgia, serif',
+          fontSize: 'clamp(28px, 5vw, 40px)',
+          fontWeight: 400,
+          letterSpacing: '0.02em',
+          color: '#1d1d1f'
+        }}>
+          {getPageTitle()}
+        </h1>
+        <p style={{ fontSize: '14px', color: '#86868b', marginTop: '12px' }}>
+          {filteredProducts.length} Products
+        </p>
       </div>
 
       {/* Filters */}
-      <div style={{ borderBottom: '1px solid #e5e5e5', position: 'sticky', top: '60px', backgroundColor: '#fff', zIndex: 20 }}>
+      <div style={{
+        borderBottom: '1px solid #f0f0f0',
+        position: 'sticky',
+        top: '72px',
+        backgroundColor: '#fff',
+        zIndex: 20
+      }}>
         <div className="container-main">
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 0', gap: '16px', overflowX: 'auto' }}>
-            {/* Category Pills */}
-            <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '20px 0',
+            gap: '16px',
+            overflowX: 'auto'
+          }}>
+            {/* Category Pills - Apple style */}
+            <div style={{ display: 'flex', gap: '10px', flexShrink: 0 }} className="hide-scrollbar">
               <button
                 onClick={() => setSelectedCategory(null)}
                 style={{
-                  padding: '8px 16px', fontSize: '12px', borderRadius: '20px', border: '1px solid',
-                  borderColor: !selectedCategory ? '#000' : '#ddd',
-                  backgroundColor: !selectedCategory ? '#000' : '#fff',
-                  color: !selectedCategory ? '#fff' : '#000',
-                  cursor: 'pointer', whiteSpace: 'nowrap'
+                  padding: '10px 20px',
+                  fontSize: '13px',
+                  borderRadius: '24px',
+                  border: 'none',
+                  backgroundColor: !selectedCategory ? '#1d1d1f' : '#f5f5f7',
+                  color: !selectedCategory ? '#fff' : '#1d1d1f',
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                  fontWeight: 500,
+                  transition: 'all 0.2s ease'
                 }}
               >
                 All
@@ -84,11 +112,16 @@ function ProductsContent() {
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.slug)}
                   style={{
-                    padding: '8px 16px', fontSize: '12px', borderRadius: '20px', border: '1px solid',
-                    borderColor: selectedCategory === cat.slug ? '#000' : '#ddd',
-                    backgroundColor: selectedCategory === cat.slug ? '#000' : '#fff',
-                    color: selectedCategory === cat.slug ? '#fff' : '#000',
-                    cursor: 'pointer', whiteSpace: 'nowrap'
+                    padding: '10px 20px',
+                    fontSize: '13px',
+                    borderRadius: '24px',
+                    border: 'none',
+                    backgroundColor: selectedCategory === cat.slug ? '#1d1d1f' : '#f5f5f7',
+                    color: selectedCategory === cat.slug ? '#fff' : '#1d1d1f',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    fontWeight: 500,
+                    transition: 'all 0.2s ease'
                   }}
                 >
                   {cat.name}
@@ -97,12 +130,20 @@ function ProductsContent() {
             </div>
 
             {/* Sort */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
-              <span style={{ fontSize: '12px', color: '#666' }}>Sort:</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+              <span style={{ fontSize: '13px', color: '#86868b' }}>Sort:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                style={{ fontSize: '13px', fontWeight: 500, border: 'none', cursor: 'pointer', backgroundColor: 'transparent' }}
+                style={{
+                  fontSize: '13px',
+                  fontWeight: 500,
+                  border: 'none',
+                  cursor: 'pointer',
+                  backgroundColor: 'transparent',
+                  color: '#1d1d1f',
+                  outline: 'none'
+                }}
               >
                 {sortOptions.map((opt) => (
                   <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -114,13 +155,22 @@ function ProductsContent() {
       </div>
 
       {/* Grid */}
-      <div className="container-main" style={{ padding: '32px 16px' }}>
+      <div className="container-main" style={{ padding: '48px 20px 80px' }}>
         {filteredProducts.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '64px 0' }}>
-            <p style={{ color: '#666', marginBottom: '16px' }}>No products found</p>
+          <div style={{ textAlign: 'center', padding: '80px 0' }}>
+            <p style={{ color: '#86868b', marginBottom: '20px', fontSize: '15px' }}>No products found</p>
             <button
               onClick={() => setSelectedCategory(null)}
-              style={{ fontSize: '13px', textDecoration: 'underline', border: 'none', background: 'none', cursor: 'pointer' }}
+              style={{
+                fontSize: '13px',
+                fontWeight: 500,
+                padding: '14px 32px',
+                backgroundColor: '#1d1d1f',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '24px',
+                cursor: 'pointer'
+              }}
             >
               Clear filters
             </button>
@@ -140,8 +190,14 @@ function ProductsContent() {
 function LoadingFallback() {
   return (
     <div style={{ minHeight: '100vh' }}>
-      <div style={{ backgroundColor: '#fafafa', padding: '40px 0', textAlign: 'center' }}>
-        <div style={{ height: '32px', width: '200px', backgroundColor: '#e5e5e5', margin: '0 auto', borderRadius: '4px' }} />
+      <div style={{ backgroundColor: '#fafafa', padding: '60px 0', textAlign: 'center' }}>
+        <div style={{
+          height: '40px',
+          width: '200px',
+          backgroundColor: '#e0e0e0',
+          margin: '0 auto',
+          borderRadius: '4px'
+        }} />
       </div>
     </div>
   );

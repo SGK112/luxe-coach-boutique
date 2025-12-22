@@ -12,17 +12,31 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
-  color: #000;
+  line-height: 1.6;
+  color: #1a1a1a;
   background: #fff;
+  letter-spacing: 0.01em;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.7;
 }
 
 img {
@@ -31,41 +45,53 @@ img {
   display: block;
 }
 
+button {
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
 /* Container - Force Centering */
 .container-main {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 @media (min-width: 768px) {
   .container-main {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 }
 
-/* Product Grid */
+@media (min-width: 1024px) {
+  .container-main {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+
+/* Product Grid - Spacious */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 24px;
 }
 
 @media (min-width: 768px) {
   .product-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 32px;
   }
 }
 
 @media (min-width: 1024px) {
   .product-grid {
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    gap: 40px;
   }
 }
 
@@ -79,6 +105,7 @@ img {
 @media (min-width: 768px) {
   .category-grid {
     grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
   }
 }
 
@@ -93,6 +120,45 @@ img {
   .features-grid {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+/* Premium Button Styles */
+.btn-primary {
+  display: inline-block;
+  background-color: #000;
+  color: #fff;
+  padding: 16px 40px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #333;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  display: inline-block;
+  background-color: transparent;
+  color: #000;
+  padding: 16px 40px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #000;
+  color: #fff;
 }
 
 /* Hide Scrollbar */
@@ -118,6 +184,15 @@ img {
 }
 
 /* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
@@ -125,4 +200,25 @@ img {
 
 .animate-pulse {
   animation: pulse 2s ease-in-out infinite;
+}
+
+/* Image hover effect */
+.product-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  background-color: #f8f8f8;
+}
+
+.product-image-wrapper img {
+  transition: transform 0.6s ease;
+}
+
+.product-image-wrapper:hover img {
+  transform: scale(1.03);
+}
+
+/* Selection */
+::selection {
+  background-color: #000;
+  color: #fff;
 }
