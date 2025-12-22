@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/* =============================================
+   LUXE COACH BOUTIQUE - Premium Design System
+   ============================================= */
+
+/* Color Palette - Darker White Tints */
+:root {
+  --white: #ffffff;
+  --white-soft: #fafafa;
+  --white-muted: #f5f5f5;
+  --white-dim: #f0f0f0;
+  --gray-lightest: #e8e8e8;
+  --gray-light: #d4d4d4;
+  --gray-medium: #86868b;
+  --gray-dark: #6e6e73;
+  --black-soft: #1d1d1f;
+  --black: #000000;
+  --accent: #bf4800;
+}
+
 /* Base Reset */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -16,8 +35,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
-  color: #1a1a1a;
-  background: #fff;
+  color: var(--black-soft);
+  background: var(--white);
   letter-spacing: 0.01em;
 }
 
@@ -56,8 +75,8 @@ button {
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 @media (min-width: 768px) {
@@ -74,24 +93,24 @@ button {
   }
 }
 
-/* Product Grid - Spacious */
+/* Product Grid - Mobile First */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 16px;
 }
 
 @media (min-width: 768px) {
   .product-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    gap: 28px;
   }
 }
 
 @media (min-width: 1024px) {
   .product-grid {
     grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
+    gap: 36px;
   }
 }
 
@@ -99,7 +118,7 @@ button {
 .category-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 12px;
 }
 
 @media (min-width: 768px) {
@@ -113,7 +132,7 @@ button {
 .features-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 12px;
 }
 
 @media (min-width: 768px) {
@@ -122,44 +141,112 @@ button {
   }
 }
 
-/* Premium Button Styles */
+/* =============================================
+   MOBILE RESPONSIVE UTILITIES
+   ============================================= */
+
+/* Mobile-only elements */
+.mobile-only {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+/* Desktop-only elements */
+.desktop-only {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .desktop-only {
+    display: block;
+  }
+}
+
+/* Touch-friendly targets (min 44px) */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* =============================================
+   PREMIUM SHADOWS
+   ============================================= */
+
+.shadow-soft {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.shadow-medium {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.shadow-strong {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.shadow-elevated {
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+/* =============================================
+   BUTTON STYLES
+   ============================================= */
+
 .btn-primary {
   display: inline-block;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--black-soft);
+  color: var(--white);
   padding: 16px 40px;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   border: none;
+  border-radius: 2px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-  background-color: #333;
+  background-color: var(--black);
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .btn-secondary {
   display: inline-block;
   background-color: transparent;
-  color: #000;
+  color: var(--black-soft);
   padding: 16px 40px;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  border: 1px solid #000;
+  border: 1px solid var(--black-soft);
+  border-radius: 2px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--black-soft);
+  color: var(--white);
 }
+
+/* Pill Button */
+.btn-pill {
+  border-radius: 32px;
+  padding: 14px 32px;
+}
+
+/* =============================================
+   UTILITY CLASSES
+   ============================================= */
 
 /* Hide Scrollbar */
 .hide-scrollbar {
@@ -178,12 +265,26 @@ button {
   overflow: hidden;
 }
 
-/* Safe Areas */
+/* Safe Areas for Mobile */
 .safe-bottom {
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
-/* Animations */
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0);
+}
+
+/* Background Colors with Darker Tints */
+.bg-white { background-color: var(--white); }
+.bg-white-soft { background-color: var(--white-soft); }
+.bg-white-muted { background-color: var(--white-muted); }
+.bg-white-dim { background-color: var(--white-dim); }
+.bg-gray-lightest { background-color: var(--gray-lightest); }
+
+/* =============================================
+   ANIMATIONS
+   ============================================= */
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -202,11 +303,23 @@ button {
   animation: pulse 2s ease-in-out infinite;
 }
 
-/* Image hover effect */
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* =============================================
+   IMAGE EFFECTS
+   ============================================= */
+
 .product-image-wrapper {
   position: relative;
   overflow: hidden;
-  background-color: #f8f8f8;
+  background-color: var(--white-muted);
 }
 
 .product-image-wrapper img {
@@ -217,8 +330,41 @@ button {
   transform: scale(1.03);
 }
 
-/* Selection */
+/* Frosted Glass Effect */
+.frosted-glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* =============================================
+   SELECTION
+   ============================================= */
+
 ::selection {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--black-soft);
+  color: var(--white);
+}
+
+/* =============================================
+   FOCUS STATES
+   ============================================= */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* =============================================
+   FORM ELEMENTS
+   ============================================= */
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: 16px; /* Prevents iOS zoom */
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--gray-medium);
 }
