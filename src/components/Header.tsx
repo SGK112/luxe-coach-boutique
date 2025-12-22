@@ -6,26 +6,22 @@ import { Search, Heart, ShoppingBag, Menu, X } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import CartSlideOver from './CartSlideOver';
 
-const navigation = [
-  { name: 'New', href: '/products?filter=new' },
-  { name: 'Handbags', href: '/products' },
-  { name: 'Shoulder Bags', href: '/products?category=shoulder-bags' },
-  { name: 'Totes', href: '/products?category=tote-bags' },
-  { name: 'Crossbody', href: '/products?category=crossbody-bags' },
+const navLeft = [
+  { name: 'New', href: '/products?filter=new', highlight: false },
+  { name: 'Handbags', href: '/products', highlight: false },
+  { name: 'Shoulder Bags', href: '/products?category=shoulder-bags', highlight: false },
+];
+
+const navRight = [
+  { name: 'Totes', href: '/products?category=tote-bags', highlight: false },
+  { name: 'Crossbody', href: '/products?category=crossbody-bags', highlight: false },
   { name: 'Sale', href: '/products?filter=sale', highlight: true },
 ];
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { getCartCount, setIsCartOpen, wishlist } = useStore();
   const cartCount = getCartCount();
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 0);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
@@ -34,88 +30,91 @@ export default function Header() {
 
   return (
     <>
-      {/* Announcement Bar */}
-      <div className="bg-black text-white text-center py-2 px-4">
-        <p className="text-[11px] tracking-widest uppercase">
+      {/* Announcement */}
+      <div style={{ backgroundColor: '#000', color: '#fff', textAlign: 'center', padding: '10px 16px' }}>
+        <p style={{ fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', margin: 0 }}>
           Free Shipping on Orders Over $150
         </p>
       </div>
 
-      {/* Main Header */}
-      <header className={`sticky top-0 z-40 bg-white transition-shadow ${isScrolled ? 'shadow-sm' : ''}`}>
-        <div className="w-full max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between h-14">
-            {/* Left - Mobile Menu Button */}
-            <div className="flex items-center md:hidden">
-              <button
-                onClick={() => setIsMobileMenuOpen(true)}
-                className="p-2 -ml-2"
-                aria-label="Open menu"
-              >
-                <Menu className="w-6 h-6" />
-              </button>
-            </div>
+      {/* Header */}
+      <header style={{ position: 'sticky', top: 0, zIndex: 40, backgroundColor: '#fff', borderBottom: '1px solid #e5e5e5' }}>
+        <div className="container-main">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '60px' }}>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              style={{ padding: '8px', display: 'block' }}
+              className="md:hidden"
+              aria-label="Menu"
+            >
+              <Menu style={{ width: '24px', height: '24px' }} />
+            </button>
 
-            {/* Left - Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-6">
-              {navigation.slice(0, 3).map((item) => (
+            {/* Left Nav - Desktop */}
+            <nav style={{ display: 'none', alignItems: 'center', gap: '24px' }} className="md:flex">
+              {navLeft.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`text-xs tracking-widest uppercase font-medium hover:text-gray-500 transition-colors ${
-                    item.highlight ? 'text-red-600' : ''
-                  }`}
+                  style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 500 }}
                 >
                   {item.name}
                 </Link>
               ))}
             </nav>
 
-            {/* Center - Logo */}
-            <Link href="/" className="flex-shrink-0">
-              <span className="text-xl md:text-2xl tracking-[0.2em] uppercase font-light">
+            {/* Logo */}
+            <Link href="/" style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+              <span style={{ fontSize: '24px', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 300 }}>
                 COACH
               </span>
             </Link>
 
-            {/* Right - Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-6">
-              {navigation.slice(3).map((item) => (
+            {/* Right Nav - Desktop */}
+            <nav style={{ display: 'none', alignItems: 'center', gap: '24px' }} className="md:flex">
+              {navRight.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`text-xs tracking-widest uppercase font-medium hover:text-gray-500 transition-colors ${
-                    item.highlight ? 'text-red-600' : ''
-                  }`}
+                  style={{
+                    fontSize: '11px',
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
+                    fontWeight: 500,
+                    color: item.highlight ? '#dc2626' : 'inherit'
+                  }}
                 >
                   {item.name}
                 </Link>
               ))}
             </nav>
 
-            {/* Right - Icons */}
-            <div className="flex items-center gap-1">
-              <button className="hidden md:flex p-2" aria-label="Search">
-                <Search className="w-5 h-5" />
+            {/* Icons */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <button style={{ padding: '8px', display: 'none' }} className="md:block" aria-label="Search">
+                <Search style={{ width: '20px', height: '20px' }} />
               </button>
-
-              <Link href="/wishlist" className="p-2 relative" aria-label="Wishlist">
-                <Heart className="w-5 h-5" />
+              <Link href="/wishlist" style={{ padding: '8px', position: 'relative' }} aria-label="Wishlist">
+                <Heart style={{ width: '20px', height: '20px' }} />
                 {wishlist.length > 0 && (
-                  <span className="absolute top-0 right-0 w-4 h-4 bg-black text-white text-[10px] rounded-full flex items-center justify-center">
+                  <span style={{
+                    position: 'absolute', top: '2px', right: '2px',
+                    width: '16px', height: '16px', backgroundColor: '#000', color: '#fff',
+                    fontSize: '10px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                  }}>
                     {wishlist.length}
                   </span>
                 )}
               </Link>
-
-              <button
-                onClick={() => setIsCartOpen(true)}
-                className="p-2 relative -mr-2"
-                aria-label="Cart"
-              >
-                <ShoppingBag className="w-5 h-5" />
+              <button onClick={() => setIsCartOpen(true)} style={{ padding: '8px', position: 'relative' }} aria-label="Cart">
+                <ShoppingBag style={{ width: '20px', height: '20px' }} />
                 {cartCount > 0 && (
-                  <span className="absolute top-0 right-0 w-4 h-4 bg-black text-white text-[10px] rounded-full flex items-center justify-center">
+                  <span style={{
+                    position: 'absolute', top: '2px', right: '2px',
+                    width: '16px', height: '16px', backgroundColor: '#000', color: '#fff',
+                    fontSize: '10px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                  }}>
                     {cartCount}
                   </span>
                 )}
@@ -127,25 +126,25 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden">
-          <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-          <div className="absolute inset-y-0 left-0 w-4/5 max-w-sm bg-white">
-            <div className="flex items-center justify-between h-14 px-4 border-b">
-              <span className="text-sm font-medium tracking-widest uppercase">Menu</span>
-              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 -mr-2">
-                <X className="w-6 h-6" />
+        <div style={{ position: 'fixed', inset: 0, zIndex: 50 }}>
+          <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)' }} onClick={() => setIsMobileMenuOpen(false)} />
+          <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, width: '80%', maxWidth: '320px', backgroundColor: '#fff' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '60px', padding: '0 16px', borderBottom: '1px solid #e5e5e5' }}>
+              <span style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Menu</span>
+              <button onClick={() => setIsMobileMenuOpen(false)} style={{ padding: '8px' }}>
+                <X style={{ width: '24px', height: '24px' }} />
               </button>
             </div>
-            <nav className="py-4">
-              {navigation.map((item) => (
+            <nav style={{ padding: '16px 0' }}>
+              {[...navLeft, ...navRight].map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block px-6 py-3 text-sm font-medium ${item.highlight ? 'text-red-600' : ''}`}
+                  style={{
+                    display: 'block', padding: '12px 24px', fontSize: '14px', fontWeight: 500,
+                    color: item.highlight ? '#dc2626' : 'inherit'
+                  }}
                 >
                   {item.name}
                 </Link>

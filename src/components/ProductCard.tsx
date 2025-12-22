@@ -29,26 +29,34 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
   };
 
   return (
-    <Link href={`/product/${product.slug}`} className="block group">
+    <Link href={`/product/${product.slug}`} style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
       {/* Image */}
-      <div className="relative aspect-square bg-gray-100 overflow-hidden mb-3">
+      <div style={{ position: 'relative', aspectRatio: '1/1', backgroundColor: '#f5f5f5', overflow: 'hidden', marginBottom: '12px' }}>
         <Image
           src={product.images[0]}
           alt={product.name}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          style={{ objectFit: 'cover' }}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           priority={priority}
         />
 
-        {/* Badges */}
+        {/* Badge */}
         {product.isNew && (
-          <span className="absolute top-2 left-2 bg-black text-white text-[10px] px-2 py-1 uppercase tracking-wider">
+          <span style={{
+            position: 'absolute', top: '8px', left: '8px',
+            backgroundColor: '#000', color: '#fff', fontSize: '10px',
+            padding: '4px 8px', textTransform: 'uppercase', letterSpacing: '0.05em'
+          }}>
             New
           </span>
         )}
-        {product.isSale && (
-          <span className="absolute top-2 left-2 bg-red-600 text-white text-[10px] px-2 py-1 uppercase tracking-wider">
+        {product.isSale && !product.isNew && (
+          <span style={{
+            position: 'absolute', top: '8px', left: '8px',
+            backgroundColor: '#dc2626', color: '#fff', fontSize: '10px',
+            padding: '4px 8px', textTransform: 'uppercase', letterSpacing: '0.05em'
+          }}>
             Sale
           </span>
         )}
@@ -56,44 +64,56 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         {/* Wishlist */}
         <button
           onClick={handleWishlistToggle}
-          className="absolute top-2 right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
-          aria-label={inWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+          style={{
+            position: 'absolute', top: '8px', right: '8px',
+            width: '32px', height: '32px', borderRadius: '50%',
+            backgroundColor: '#fff', border: 'none', cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}
+          aria-label="Wishlist"
         >
           <Heart
-            className={`w-4 h-4 ${inWishlist ? 'fill-red-500 text-red-500' : 'text-gray-600'}`}
+            style={{ width: '16px', height: '16px', fill: inWishlist ? '#dc2626' : 'none', color: inWishlist ? '#dc2626' : '#666' }}
           />
         </button>
       </div>
 
-      {/* Info */}
-      <div className="text-center px-1">
+      {/* Info - Centered */}
+      <div style={{ textAlign: 'center' }}>
         {/* Colors */}
         {product.colors.length > 1 && (
-          <div className="flex justify-center gap-1.5 mb-2">
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', marginBottom: '8px' }}>
             {product.colors.slice(0, 4).map((color) => (
               <div
                 key={color.name}
-                className="w-4 h-4 rounded-full border border-gray-300"
-                style={{ backgroundColor: color.hex }}
+                style={{
+                  width: '14px', height: '14px', borderRadius: '50%',
+                  backgroundColor: color.hex, border: '1px solid #ddd'
+                }}
                 title={color.name}
               />
             ))}
             {product.colors.length > 4 && (
-              <span className="text-xs text-gray-500">+{product.colors.length - 4}</span>
+              <span style={{ fontSize: '11px', color: '#666' }}>+{product.colors.length - 4}</span>
             )}
           </div>
         )}
 
         {/* Name */}
-        <h3 className="text-sm font-medium mb-1 line-clamp-2">{product.name}</h3>
+        <h3 style={{ fontSize: '13px', fontWeight: 500, marginBottom: '4px', lineHeight: 1.4 }}>
+          {product.name}
+        </h3>
 
         {/* Price */}
-        <div className="flex items-center justify-center gap-2">
-          <span className={`text-sm font-medium ${product.originalPrice ? 'text-red-600' : ''}`}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '13px', fontWeight: 600, color: product.originalPrice ? '#dc2626' : '#000' }}>
             ${product.price}
           </span>
           {product.originalPrice && (
-            <span className="text-sm text-gray-500 line-through">${product.originalPrice}</span>
+            <span style={{ fontSize: '12px', color: '#999', textDecoration: 'line-through' }}>
+              ${product.originalPrice}
+            </span>
           )}
         </div>
       </div>

@@ -45,60 +45,76 @@ export default function Hero() {
   const slide = slides[current];
 
   return (
-    <section className="relative w-full h-[60vh] min-h-[400px] md:h-[70vh] bg-gray-100">
-      {/* Background Image */}
+    <section style={{ position: 'relative', width: '100%', height: '70vh', minHeight: '400px', backgroundColor: '#f5f5f5' }}>
       <Image
         src={slide.image}
         alt=""
         fill
-        className="object-cover"
+        style={{ objectFit: 'cover' }}
         priority
       />
-      <div className="absolute inset-0 bg-black/30" />
+      <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.3)' }} />
 
-      {/* Content */}
-      <div className="absolute inset-0 flex items-center justify-center text-center text-white px-4">
-        <div className="max-w-lg">
-          <p className="text-xs md:text-sm tracking-[0.2em] uppercase mb-3 opacity-80">
+      {/* Content - Centered */}
+      <div style={{
+        position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
+        textAlign: 'center', color: '#fff', padding: '0 16px'
+      }}>
+        <div style={{ maxWidth: '500px' }}>
+          <p style={{ fontSize: '12px', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '12px', opacity: 0.8 }}>
             {slide.subtitle}
           </p>
-          <h1 className="text-3xl md:text-5xl font-light tracking-wide mb-6">
+          <h1 style={{ fontSize: 'clamp(28px, 5vw, 48px)', fontWeight: 300, letterSpacing: '0.05em', marginBottom: '24px' }}>
             {slide.title}
           </h1>
           <Link
             href={slide.href}
-            className="inline-block bg-white text-black px-8 py-3 text-xs tracking-[0.15em] uppercase font-medium hover:bg-gray-100 transition-colors"
+            style={{
+              display: 'inline-block', backgroundColor: '#fff', color: '#000',
+              padding: '14px 32px', fontSize: '12px', letterSpacing: '0.15em',
+              textTransform: 'uppercase', fontWeight: 500
+            }}
           >
             {slide.cta}
           </Link>
         </div>
       </div>
 
-      {/* Navigation Arrows */}
+      {/* Arrows */}
       <button
         onClick={() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 flex items-center justify-center hover:bg-white transition-colors"
+        style={{
+          position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)',
+          width: '44px', height: '44px', backgroundColor: 'rgba(255,255,255,0.9)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', cursor: 'pointer'
+        }}
         aria-label="Previous"
       >
-        <ChevronLeft className="w-5 h-5" />
+        <ChevronLeft style={{ width: '20px', height: '20px' }} />
       </button>
       <button
         onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 flex items-center justify-center hover:bg-white transition-colors"
+        style={{
+          position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)',
+          width: '44px', height: '44px', backgroundColor: 'rgba(255,255,255,0.9)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', cursor: 'pointer'
+        }}
         aria-label="Next"
       >
-        <ChevronRight className="w-5 h-5" />
+        <ChevronRight style={{ width: '20px', height: '20px' }} />
       </button>
 
       {/* Dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+      <div style={{ position: 'absolute', bottom: '24px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '8px' }}>
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className={`w-2 h-2 rounded-full transition-all ${
-              i === current ? 'bg-white w-6' : 'bg-white/50'
-            }`}
+            style={{
+              width: i === current ? '24px' : '8px', height: '8px',
+              borderRadius: '4px', backgroundColor: i === current ? '#fff' : 'rgba(255,255,255,0.5)',
+              border: 'none', cursor: 'pointer', transition: 'all 0.3s'
+            }}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}

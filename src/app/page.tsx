@@ -16,14 +16,14 @@ export default function Home() {
     <>
       <Hero />
 
-      {/* Features Strip */}
-      <section className="border-b">
-        <div className="w-full max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-6">
+      {/* Features */}
+      <section style={{ borderBottom: '1px solid #e5e5e5' }}>
+        <div className="container-main">
+          <div className="features-grid" style={{ padding: '20px 0' }}>
             {features.map((feature) => (
-              <div key={feature.text} className="flex items-center justify-center gap-2">
-                <feature.icon className="w-4 h-4 text-gray-600" />
-                <span className="text-xs text-gray-700">{feature.text}</span>
+              <div key={feature.text} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                <feature.icon style={{ width: '16px', height: '16px', color: '#666' }} />
+                <span style={{ fontSize: '11px', color: '#666' }}>{feature.text}</span>
               </div>
             ))}
           </div>
@@ -33,27 +33,31 @@ export default function Home() {
       {/* New Arrivals */}
       <FeaturedProducts title="New Arrivals" filter="new" limit={4} />
 
-      {/* Category Grid */}
+      {/* Categories */}
       <CategoryGrid />
 
       {/* Bestsellers */}
       <FeaturedProducts title="Bestsellers" filter="bestseller" limit={4} />
 
       {/* Sale Banner */}
-      <section className="bg-black text-white">
-        <div className="w-full max-w-7xl mx-auto px-4 py-16 md:py-20 text-center">
-          <span className="text-[11px] tracking-[0.3em] uppercase text-gray-400 block mb-3">
+      <section style={{ backgroundColor: '#000', color: '#fff' }}>
+        <div className="container-main" style={{ padding: '64px 16px', textAlign: 'center' }}>
+          <span style={{ fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#999', display: 'block', marginBottom: '12px' }}>
             Limited Time
           </span>
-          <h2 className="text-2xl md:text-4xl font-light tracking-wide mb-4">
+          <h2 style={{ fontSize: 'clamp(24px, 4vw, 40px)', fontWeight: 300, letterSpacing: '0.02em', marginBottom: '16px' }}>
             Holiday Sale
           </h2>
-          <p className="text-gray-400 text-sm mb-8 max-w-md mx-auto">
+          <p style={{ fontSize: '14px', color: '#999', marginBottom: '24px', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto' }}>
             Up to 40% off select designer handbags. The perfect gift awaits.
           </p>
           <Link
             href="/products?filter=sale"
-            className="inline-block bg-white text-black px-8 py-3 text-xs tracking-[0.15em] uppercase font-medium hover:bg-gray-100 transition-colors"
+            style={{
+              display: 'inline-block', backgroundColor: '#fff', color: '#000',
+              padding: '14px 32px', fontSize: '12px', letterSpacing: '0.15em',
+              textTransform: 'uppercase', fontWeight: 500
+            }}
           >
             Shop Sale
           </Link>

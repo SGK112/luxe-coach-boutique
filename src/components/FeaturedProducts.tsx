@@ -26,24 +26,24 @@ export default function FeaturedProducts({
     .slice(0, limit);
 
   return (
-    <section className="py-12 md:py-16">
-      <div className="w-full max-w-7xl mx-auto px-4">
+    <section style={{ padding: '48px 0' }}>
+      <div className="container-main">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-xl md:text-2xl font-light tracking-wide">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px' }}>
+          <h2 style={{ fontSize: '20px', fontWeight: 300, letterSpacing: '0.02em' }}>
             {title}
           </h2>
           <Link
             href={`/products${filter !== 'all' ? `?filter=${filter}` : ''}`}
-            className="flex items-center gap-1 text-xs tracking-widest uppercase font-medium hover:text-gray-500 transition-colors"
+            style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 500 }}
           >
             View All
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight style={{ width: '16px', height: '16px' }} />
           </Link>
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        {/* Grid */}
+        <div className="product-grid">
           {filteredProducts.map((product, index) => (
             <ProductCard
               key={product.id}

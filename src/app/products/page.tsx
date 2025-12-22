@@ -2,7 +2,6 @@
 
 import { Suspense, useState, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { ChevronDown, X } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import { products, categories } from '@/data/products';
 
@@ -24,7 +23,6 @@ function ProductsContent() {
   const filteredProducts = useMemo(() => {
     let result = [...products];
 
-    // Filter by category
     if (selectedCategory) {
       result = result.filter((p) =>
         p.category.toLowerCase().replace(/\s+/g, '-') === selectedCategory ||
@@ -32,26 +30,13 @@ function ProductsContent() {
       );
     }
 
-    // Filter by special filters
-    if (filterParam === 'new') {
-      result = result.filter((p) => p.isNew);
-    } else if (filterParam === 'sale') {
-      result = result.filter((p) => p.isSale);
-    } else if (filterParam === 'bestseller') {
-      result = result.filter((p) => p.isBestseller);
-    }
+    if (filterParam === 'new') result = result.filter((p) => p.isNew);
+    else if (filterParam === 'sale') result = result.filter((p) => p.isSale);
+    else if (filterParam === 'bestseller') result = result.filter((p) => p.isBestseller);
 
-    // Sort
     switch (sortBy) {
-      case 'newest':
-        result = result.filter((p) => p.isNew).concat(result.filter((p) => !p.isNew));
-        break;
-      case 'price-asc':
-        result.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-desc':
-        result.sort((a, b) => b.price - a.price);
-        break;
+      case 'price-asc': result.sort((a, b) => a.price - b.price); break;
+      case 'price-desc': result.sort((a, b) => b.price - a.price); break;
     }
 
     return result;
@@ -69,30 +54,28 @@ function ProductsContent() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div style={{ minHeight: '100vh' }}>
       {/* Header */}
-      <div className="bg-gray-50 py-10">
-        <div className="w-full max-w-7xl mx-auto px-4 text-center">
-          <h1 className="text-2xl md:text-3xl font-light tracking-wide">
-            {getPageTitle()}
-          </h1>
-          <p className="text-gray-500 text-sm mt-2">
-            {filteredProducts.length} Products
-          </p>
-        </div>
+      <div style={{ backgroundColor: '#fafafa', padding: '40px 0', textAlign: 'center' }}>
+        <h1 style={{ fontSize: '28px', fontWeight: 300, letterSpacing: '0.02em' }}>{getPageTitle()}</h1>
+        <p style={{ fontSize: '13px', color: '#666', marginTop: '8px' }}>{filteredProducts.length} Products</p>
       </div>
 
       {/* Filters */}
-      <div className="border-b sticky top-14 bg-white z-20">
-        <div className="w-full max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between py-4 overflow-x-auto hide-scrollbar gap-4">
+      <div style={{ borderBottom: '1px solid #e5e5e5', position: 'sticky', top: '60px', backgroundColor: '#fff', zIndex: 20 }}>
+        <div className="container-main">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 0', gap: '16px', overflowX: 'auto' }}>
             {/* Category Pills */}
-            <div className="flex gap-2">
+            <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
               <button
                 onClick={() => setSelectedCategory(null)}
-                className={`px-4 py-2 text-xs tracking-wide rounded-full border whitespace-nowrap transition-colors ${
-                  !selectedCategory ? 'bg-black text-white border-black' : 'border-gray-300 hover:border-black'
-                }`}
+                style={{
+                  padding: '8px 16px', fontSize: '12px', borderRadius: '20px', border: '1px solid',
+                  borderColor: !selectedCategory ? '#000' : '#ddd',
+                  backgroundColor: !selectedCategory ? '#000' : '#fff',
+                  color: !selectedCategory ? '#fff' : '#000',
+                  cursor: 'pointer', whiteSpace: 'nowrap'
+                }}
               >
                 All
               </button>
@@ -100,9 +83,13 @@ function ProductsContent() {
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.slug)}
-                  className={`px-4 py-2 text-xs tracking-wide rounded-full border whitespace-nowrap transition-colors ${
-                    selectedCategory === cat.slug ? 'bg-black text-white border-black' : 'border-gray-300 hover:border-black'
-                  }`}
+                  style={{
+                    padding: '8px 16px', fontSize: '12px', borderRadius: '20px', border: '1px solid',
+                    borderColor: selectedCategory === cat.slug ? '#000' : '#ddd',
+                    backgroundColor: selectedCategory === cat.slug ? '#000' : '#fff',
+                    color: selectedCategory === cat.slug ? '#fff' : '#000',
+                    cursor: 'pointer', whiteSpace: 'nowrap'
+                  }}
                 >
                   {cat.name}
                 </button>
@@ -110,12 +97,12 @@ function ProductsContent() {
             </div>
 
             {/* Sort */}
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <label className="text-xs text-gray-500">Sort:</label>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+              <span style={{ fontSize: '12px', color: '#666' }}>Sort:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="text-sm font-medium bg-transparent border-0 focus:outline-none cursor-pointer"
+                style={{ fontSize: '13px', fontWeight: 500, border: 'none', cursor: 'pointer', backgroundColor: 'transparent' }}
               >
                 {sortOptions.map((opt) => (
                   <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -126,20 +113,20 @@ function ProductsContent() {
         </div>
       </div>
 
-      {/* Product Grid */}
-      <div className="w-full max-w-7xl mx-auto px-4 py-8">
+      {/* Grid */}
+      <div className="container-main" style={{ padding: '32px 16px' }}>
         {filteredProducts.length === 0 ? (
-          <div className="text-center py-16">
-            <p className="text-gray-500 mb-4">No products found</p>
+          <div style={{ textAlign: 'center', padding: '64px 0' }}>
+            <p style={{ color: '#666', marginBottom: '16px' }}>No products found</p>
             <button
               onClick={() => setSelectedCategory(null)}
-              className="text-sm underline hover:no-underline"
+              style={{ fontSize: '13px', textDecoration: 'underline', border: 'none', background: 'none', cursor: 'pointer' }}
             >
               Clear filters
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="product-grid">
             {filteredProducts.map((product, i) => (
               <ProductCard key={product.id} product={product} priority={i < 4} />
             ))}
@@ -152,22 +139,9 @@ function ProductsContent() {
 
 function LoadingFallback() {
   return (
-    <div className="min-h-screen">
-      <div className="bg-gray-50 py-10">
-        <div className="w-full max-w-7xl mx-auto px-4 text-center">
-          <div className="h-8 w-48 bg-gray-200 mx-auto rounded animate-pulse" />
-        </div>
-      </div>
-      <div className="w-full max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {[...Array(8)].map((_, i) => (
-            <div key={i}>
-              <div className="aspect-square bg-gray-200 rounded animate-pulse mb-3" />
-              <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto animate-pulse mb-2" />
-              <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto animate-pulse" />
-            </div>
-          ))}
-        </div>
+    <div style={{ minHeight: '100vh' }}>
+      <div style={{ backgroundColor: '#fafafa', padding: '40px 0', textAlign: 'center' }}>
+        <div style={{ height: '32px', width: '200px', backgroundColor: '#e5e5e5', margin: '0 auto', borderRadius: '4px' }} />
       </div>
     </div>
   );
