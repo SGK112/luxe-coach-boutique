@@ -1,107 +1,104 @@
 'use client';
 
 import Link from 'next/link';
-import { Instagram, Facebook, Twitter, Youtube, Mail } from 'lucide-react';
+import { Instagram, Facebook } from 'lucide-react';
 
 const footerLinks = {
   shop: [
     { name: 'New Arrivals', href: '/products?filter=new' },
     { name: 'Bestsellers', href: '/products?filter=bestseller' },
-    { name: 'Shoulder Bags', href: '/products?category=shoulder-bags' },
-    { name: 'Totes', href: '/products?category=tote-bags' },
-    { name: 'Crossbody', href: '/products?category=crossbody-bags' },
+    { name: 'Bags', href: '/products' },
     { name: 'Sale', href: '/products?filter=sale' },
   ],
   help: [
-    { name: 'Contact Us', href: '/contact' },
-    { name: 'FAQs', href: '/faq' },
-    { name: 'Shipping & Returns', href: '/shipping' },
-    { name: 'Size Guide', href: '/size-guide' },
-    { name: 'Track Order', href: '/track-order' },
+    { name: 'Contact', href: '/contact' },
+    { name: 'Shipping', href: '/shipping' },
+    { name: 'Returns', href: '/returns' },
+    { name: 'FAQ', href: '/faq' },
   ],
   about: [
     { name: 'Our Story', href: '/about' },
     { name: 'Craftsmanship', href: '/craftsmanship' },
     { name: 'Sustainability', href: '/sustainability' },
-    { name: 'Careers', href: '/careers' },
-    { name: 'Press', href: '/press' },
   ],
 };
-
-const socialLinks = [
-  { name: 'Instagram', icon: Instagram, href: 'https://instagram.com' },
-  { name: 'Facebook', icon: Facebook, href: 'https://facebook.com' },
-  { name: 'Twitter', icon: Twitter, href: 'https://twitter.com' },
-  { name: 'YouTube', icon: Youtube, href: 'https://youtube.com' },
-];
 
 export default function Footer() {
   return (
     <footer className="bg-black text-white">
       {/* Newsletter */}
       <div className="border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="max-w-xl mx-auto text-center">
-            <h3 className="text-2xl font-light tracking-wider mb-2">
-              Join the LuxeCoach Family
+        <div className="px-4 md:px-8 py-10 md:py-12 max-w-[1440px] mx-auto">
+          <div className="max-w-md mx-auto text-center md:text-left md:mx-0">
+            <h3 className="text-sm tracking-[0.15em] uppercase mb-2">
+              Stay Connected
             </h3>
-            <p className="text-gray-400 text-sm mb-6">
-              Be the first to know about new arrivals, exclusive offers, and style inspiration.
+            <p className="text-[13px] text-gray-400 mb-5">
+              Be the first to know about new arrivals and exclusive offers.
             </p>
-            <form className="flex gap-2 max-w-md mx-auto">
-              <div className="flex-1 relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full bg-white/10 border border-white/20 rounded-none py-3 pl-10 pr-4 text-sm placeholder-gray-400 focus:outline-none focus:border-white/40"
-                />
-              </div>
-              <button type="submit" className="btn-gold px-6 py-3 text-sm tracking-wider">
-                Subscribe
+            <form className="flex gap-2">
+              <input
+                type="email"
+                placeholder="Email address"
+                className="flex-1 h-11 px-4 bg-white/10 border border-white/20 text-sm placeholder:text-gray-500 focus:outline-none focus:border-white/40"
+              />
+              <button
+                type="submit"
+                className="h-11 px-6 bg-white text-black text-xs tracking-[0.1em] uppercase font-medium hover:bg-gray-200 transition-colors"
+              >
+                Join
               </button>
             </form>
           </div>
         </div>
       </div>
 
-      {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
+      {/* Links */}
+      <div className="px-4 md:px-8 py-10 md:py-12 max-w-[1440px] mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+          {/* Logo & Social */}
+          <div className="col-span-2 md:col-span-1 mb-4 md:mb-0">
             <Link href="/" className="inline-block mb-4">
-              <h2 className="text-xl font-light tracking-[0.2em] uppercase">
-                Luxe<span className="font-semibold">Coach</span>
-              </h2>
+              <span className="text-base tracking-[0.2em] uppercase font-light">
+                Luxe<span className="font-medium">Coach</span>
+              </span>
             </Link>
-            <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-              Curating the finest designer handbags for the modern woman.
+            <p className="text-[13px] text-gray-400 mb-5 max-w-[200px]">
+              Curating the finest designer handbags.
             </p>
-            <div className="flex gap-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-colors"
-                >
-                  <social.icon className="w-4 h-4" />
-                </a>
-              ))}
+            <div className="flex gap-3">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 flex items-center justify-center border border-white/20 rounded-full hover:bg-white hover:text-black transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-4 h-4" strokeWidth={1.5} />
+              </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 flex items-center justify-center border border-white/20 rounded-full hover:bg-white hover:text-black transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-4 h-4" strokeWidth={1.5} />
+              </a>
             </div>
           </div>
 
           {/* Shop */}
           <div>
-            <h4 className="font-semibold tracking-wider text-sm uppercase mb-4">Shop</h4>
-            <ul className="space-y-2">
+            <h4 className="text-[11px] tracking-[0.15em] uppercase font-medium mb-4">
+              Shop
+            </h4>
+            <ul className="space-y-2.5">
               {footerLinks.shop.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 text-sm hover:text-white transition-colors"
+                    className="text-[13px] text-gray-400 hover:text-white transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -112,13 +109,15 @@ export default function Footer() {
 
           {/* Help */}
           <div>
-            <h4 className="font-semibold tracking-wider text-sm uppercase mb-4">Help</h4>
-            <ul className="space-y-2">
+            <h4 className="text-[11px] tracking-[0.15em] uppercase font-medium mb-4">
+              Help
+            </h4>
+            <ul className="space-y-2.5">
               {footerLinks.help.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 text-sm hover:text-white transition-colors"
+                    className="text-[13px] text-gray-400 hover:text-white transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -129,13 +128,15 @@ export default function Footer() {
 
           {/* About */}
           <div>
-            <h4 className="font-semibold tracking-wider text-sm uppercase mb-4">About</h4>
-            <ul className="space-y-2">
+            <h4 className="text-[11px] tracking-[0.15em] uppercase font-medium mb-4">
+              About
+            </h4>
+            <ul className="space-y-2.5">
               {footerLinks.about.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 text-sm hover:text-white transition-colors"
+                    className="text-[13px] text-gray-400 hover:text-white transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -148,20 +149,15 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-gray-400 text-xs">
-              &copy; {new Date().getFullYear()} LuxeCoach. All rights reserved.
-            </p>
-            <div className="flex gap-6 text-xs text-gray-400">
+        <div className="px-4 md:px-8 py-5 max-w-[1440px] mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] text-gray-500">
+            <p>&copy; {new Date().getFullYear()} LuxeCoach</p>
+            <div className="flex gap-5">
               <Link href="/privacy" className="hover:text-white transition-colors">
-                Privacy Policy
+                Privacy
               </Link>
               <Link href="/terms" className="hover:text-white transition-colors">
-                Terms of Service
-              </Link>
-              <Link href="/accessibility" className="hover:text-white transition-colors">
-                Accessibility
+                Terms
               </Link>
             </div>
           </div>

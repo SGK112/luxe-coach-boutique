@@ -2,138 +2,99 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const slides = [
   {
     id: 1,
-    title: 'The New Tabby Collection',
+    title: 'The Tabby Collection',
     subtitle: 'Iconic design, reimagined',
     cta: 'Shop Now',
     href: '/products?collection=tabby',
-    image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1920',
-    position: 'left',
+    image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1920&q=80',
   },
   {
     id: 2,
     title: 'Signature Style',
-    subtitle: 'Timeless elegance meets modern design',
-    cta: 'Explore Collection',
+    subtitle: 'Timeless elegance',
+    cta: 'Explore',
     href: '/products',
-    image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=1920',
-    position: 'right',
+    image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=1920&q=80',
   },
   {
     id: 3,
-    title: 'Holiday Sale',
-    subtitle: 'Up to 40% off select styles',
+    title: 'Holiday Edit',
+    subtitle: 'Up to 40% off',
     cta: 'Shop Sale',
     href: '/products?filter=sale',
-    image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1920',
-    position: 'center',
+    image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1920&q=80',
   },
 ];
 
 export default function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000);
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-  };
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
   return (
-    <section className="relative h-[70vh] md:h-[85vh] overflow-hidden">
+    <section className="relative h-[60vh] min-h-[400px] md:h-[75vh] md:min-h-[500px] overflow-hidden">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
           className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? 'opacity-100' : 'opacity-0'
+            index === current ? 'opacity-100' : 'opacity-0'
           }`}
         >
           {/* Background Image */}
-          <div className="absolute inset-0">
-            <Image
-              src={slide.image}
-              alt={slide.title}
-              fill
-              className="object-cover"
-              priority={index === 0}
-            />
-            <div className="absolute inset-0 bg-black/30" />
-          </div>
+          <Image
+            src={slide.image}
+            alt=""
+            fill
+            className="object-cover"
+            priority={index === 0}
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-black/25" />
 
           {/* Content */}
-          <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
-            <div
-              className={`max-w-xl ${
-                slide.position === 'center'
-                  ? 'mx-auto text-center'
-                  : slide.position === 'right'
-                  ? 'ml-auto text-right'
-                  : ''
-              }`}
-            >
-              <h2 className="text-white text-4xl md:text-6xl font-light tracking-wide mb-4 fade-in">
-                {slide.title}
-              </h2>
-              <p className="text-white/90 text-lg md:text-xl mb-8 fade-in">
-                {slide.subtitle}
-              </p>
-              <Link
-                href={slide.href}
-                className={`inline-flex items-center gap-2 btn btn-gold ${
-                  slide.position === 'center' ? '' : ''
-                }`}
-              >
-                {slide.cta}
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full px-4 md:px-8 lg:px-16 max-w-[1440px] mx-auto">
+              <div className="max-w-md">
+                <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-light tracking-wide mb-3">
+                  {slide.title}
+                </h2>
+                <p className="text-white/80 text-base md:text-lg mb-6">
+                  {slide.subtitle}
+                </p>
+                <Link
+                  href={slide.href}
+                  className="inline-flex items-center h-11 px-8 bg-white text-black text-xs tracking-[0.15em] uppercase font-medium hover:bg-gray-100 transition-colors"
+                >
+                  {slide.cta}
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       ))}
-
-      {/* Navigation Arrows */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center text-white transition-colors"
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center text-white transition-colors"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
 
       {/* Dots */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
         {slides.map((_, index) => (
           <button
             key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all ${
-              index === currentSlide
-                ? 'bg-white w-8'
-                : 'bg-white/50 hover:bg-white/75'
+            onClick={() => setCurrent(index)}
+            className={`h-1 rounded-full transition-all duration-300 ${
+              index === current
+                ? 'w-8 bg-white'
+                : 'w-1 bg-white/50 hover:bg-white/70'
             }`}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>

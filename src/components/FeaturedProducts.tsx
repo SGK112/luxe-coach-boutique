@@ -1,24 +1,20 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import ProductCard from './ProductCard';
 import { products } from '@/data/products';
 
 interface FeaturedProductsProps {
-  title?: string;
-  subtitle?: string;
+  title: string;
   filter?: 'all' | 'new' | 'bestseller' | 'sale';
   limit?: number;
-  showViewAll?: boolean;
 }
 
 export default function FeaturedProducts({
-  title = 'Featured Collection',
-  subtitle,
+  title,
   filter = 'all',
   limit = 4,
-  showViewAll = true,
 }: FeaturedProductsProps) {
   const filteredProducts = products
     .filter((p) => {
@@ -30,29 +26,30 @@ export default function FeaturedProducts({
     .slice(0, limit);
 
   return (
-    <section className="py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-10 md:py-14">
+      <div className="px-4 md:px-8 max-w-[1440px] mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-10">
-          <div>
-            <h2 className="text-3xl font-light tracking-wider mb-2">{title}</h2>
-            {subtitle && <p className="text-gray-600">{subtitle}</p>}
-          </div>
-          {showViewAll && (
-            <Link
-              href={`/products${filter !== 'all' ? `?filter=${filter}` : ''}`}
-              className="inline-flex items-center gap-2 text-sm tracking-wider uppercase mt-4 md:mt-0 hover:gap-3 transition-all"
-            >
-              View All
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          )}
+        <div className="flex items-center justify-between mb-6 md:mb-8">
+          <h2 className="text-xl md:text-2xl font-light tracking-wide">
+            {title}
+          </h2>
+          <Link
+            href={`/products${filter !== 'all' ? `?filter=${filter}` : ''}`}
+            className="flex items-center gap-1 text-[11px] tracking-[0.1em] uppercase hover:opacity-60 transition-opacity"
+          >
+            View All
+            <ChevronRight className="w-4 h-4" strokeWidth={1.5} />
+          </Link>
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 stagger-children">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+          {filteredProducts.map((product, index) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              priority={index < 2}
+            />
           ))}
         </div>
       </div>
