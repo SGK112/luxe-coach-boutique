@@ -1,15 +1,15 @@
 'use client';
 
-import { useRouter, usePathname } from 'next/navigation';
-import { LogOut, ChevronRight } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { useSession, signOut } from 'next-auth/react';
+import { LogOut, ChevronRight, User } from 'lucide-react';
 
 export default function AdminHeader() {
-  const router = useRouter();
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   const handleLogout = async () => {
-    await fetch('/api/admin/auth', { method: 'DELETE' });
-    router.push('/admin/login');
+    await signOut({ callbackUrl: '/admin/login' });
   };
 
   // Generate breadcrumbs from pathname
@@ -67,28 +67,61 @@ export default function AdminHeader() {
         ))}
       </nav>
 
-      {/* Logout Button */}
-      <button
-        onClick={handleLogout}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '10px 20px',
-          backgroundColor: '#f5f5f5',
-          border: 'none',
-          borderRadius: '20px',
-          fontSize: '13px',
-          color: '#1d1d1f',
-          cursor: 'pointer',
-          transition: 'background-color 0.2s'
-        }}
-        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#e8e8e8'}
-        onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
-      >
-        <LogOut style={{ width: '16px', height: '16px' }} />
-        Logout
-      </button>
+      {/* User Info & Logout */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        {session?.user && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {session.user.image ? (
+              <img
+                src={session.user.image}
+                alt={session.user.name || 'User'}
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  objectFit: 'cover'
+                }}
+              />
+            ) : (
+              <div style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                backgroundColor: '#f0f0f0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <User style={{ width: '16px', height: '16px', color: '#86868b' }} />
+              </div>
+            )}
+            <span style={{ fontSize: '13px', color: '#1d1d1f' }}>
+              {session.user.name || session.user.email}
+            </span>
+          </div>
+        )}
+        <button
+          onClick={handleLogout}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '10px 20px',
+            backgroundColor: '#f5f5f5',
+            border: 'none',
+            borderRadius: '20px',
+            fontSize: '13px',
+            color: '#1d1d1f',
+            cursor: 'pointer',
+            transition: 'background-color 0.2s'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#e8e8e8'}
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
+        >
+          <LogOut style={{ width: '16px', height: '16px' }} />
+          Logout
+        </button>
+      </div>
     </header>
   );
 }
