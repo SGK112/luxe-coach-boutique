@@ -1,0 +1,419 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Brooklyn Shoulder Bag 28",
+      "slug": "brooklyn-shoulder-bag-28",
+      "price": 295,
+      "images": ["https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Burgundy", "hex": "#722F37" },
+        { "name": "Tan", "hex": "#D2B48C" },
+        { "name": "Cream", "hex": "#FFFDD0" }
+      ],
+      "category": "Shoulder Bags",
+      "description": "Refined shoulder bag with signature hardware.",
+      "details": ["Polished pebble leather", "Adjustable strap", "Interior zip pocket"],
+      "rating": 4.8,
+      "reviewCount": 124,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "2",
+      "name": "Tabby Shoulder Bag 26",
+      "slug": "tabby-shoulder-bag-26",
+      "price": 450,
+      "images": ["https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Chalk", "hex": "#F5F5DC" },
+        { "name": "Forest", "hex": "#228B22" }
+      ],
+      "category": "Shoulder Bags",
+      "description": "Iconic Tabby with pillow-soft silhouette.",
+      "details": ["Soft nappa leather", "Signature Tabby hardware", "Fabric lining"],
+      "rating": 4.9,
+      "reviewCount": 234,
+      "isBestseller": true,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "3",
+      "name": "Soft Tabby Shoulder Bag",
+      "slug": "soft-tabby-shoulder-bag",
+      "price": 495,
+      "images": ["https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Ivory", "hex": "#FFFFF0" }
+      ],
+      "category": "Shoulder Bags",
+      "description": "Ultra-soft leather in a relaxed silhouette.",
+      "details": ["Glovetanned leather", "Turnlock closure", "Detachable strap"],
+      "rating": 4.7,
+      "reviewCount": 89,
+      "isNew": true,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "4",
+      "name": "Ergo Shoulder Bag",
+      "slug": "ergo-shoulder-bag",
+      "price": 350,
+      "images": ["https://images.unsplash.com/photo-1591561954557-26941169b49e?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Pewter", "hex": "#8E9196" },
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Red", "hex": "#C41E3A" }
+      ],
+      "category": "Shoulder Bags",
+      "description": "Ergonomic design with modern appeal.",
+      "details": ["Smooth leather", "Zip closure", "Interior pockets"],
+      "rating": 4.6,
+      "reviewCount": 67,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "5",
+      "name": "Pillow Tabby 26",
+      "slug": "pillow-tabby-26",
+      "price": 550,
+      "images": ["https://images.unsplash.com/photo-1575032617751-6ddec2089882?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Pale Pistachio", "hex": "#93C572" },
+        { "name": "Candy Pink", "hex": "#FFB6C1" }
+      ],
+      "category": "Shoulder Bags",
+      "description": "Cloud-like comfort meets luxury.",
+      "details": ["Puffy nappa leather", "Magnetic closure", "Adjustable strap"],
+      "rating": 4.8,
+      "reviewCount": 156,
+      "isBestseller": true,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "6",
+      "name": "Studio Shoulder Bag",
+      "slug": "studio-shoulder-bag",
+      "price": 395,
+      "images": ["https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Brown", "hex": "#8B4513" }
+      ],
+      "category": "Crossbody Bags",
+      "description": "Structured silhouette for everyday elegance.",
+      "details": ["Refined calf leather", "Flap closure", "Chain strap"],
+      "rating": 4.5,
+      "reviewCount": 78,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "7",
+      "name": "Cassie Crossbody 19",
+      "slug": "cassie-crossbody-19",
+      "price": 295,
+      "originalPrice": 395,
+      "images": ["https://images.unsplash.com/photo-1591561954557-26941169b49e?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Vintage Mauve", "hex": "#B784A7" },
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Ivory", "hex": "#FFFFF0" }
+      ],
+      "category": "Crossbody Bags",
+      "description": "Modern classic with versatile style.",
+      "details": ["Glovetanned leather", "Turnlock flap", "Adjustable strap"],
+      "rating": 4.6,
+      "reviewCount": 178,
+      "isSale": true,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "8",
+      "name": "Bandit Crossbody",
+      "slug": "bandit-crossbody",
+      "price": 325,
+      "images": ["https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Oxblood", "hex": "#4A0000" }
+      ],
+      "category": "Crossbody Bags",
+      "description": "Western-inspired with modern edge.",
+      "details": ["Grained leather", "Buckle closure", "Front pocket"],
+      "rating": 4.4,
+      "reviewCount": 45,
+      "isNew": true,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "9",
+      "name": "Swinger 20",
+      "slug": "swinger-20",
+      "price": 250,
+      "images": ["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Saddle", "hex": "#8B7355" },
+        { "name": "Chalk", "hex": "#F5F5DC" }
+      ],
+      "category": "Crossbody Bags",
+      "description": "Compact yet spacious everyday bag.",
+      "details": ["Pebble leather", "Zip top", "Card slots"],
+      "rating": 4.7,
+      "reviewCount": 92,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "10",
+      "name": "Penn Shoulder Bag",
+      "slug": "penn-shoulder-bag",
+      "price": 375,
+      "images": ["https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Brown", "hex": "#8B4513" }
+      ],
+      "category": "Crossbody Bags",
+      "description": "Sleek design with convertible strap.",
+      "details": ["Smooth leather", "Magnetic snap", "Interior pocket"],
+      "rating": 4.5,
+      "reviewCount": 56,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "11",
+      "name": "Willow Tote",
+      "slug": "willow-tote",
+      "price": 495,
+      "images": ["https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Chalk Multi", "hex": "#F5DEB3" },
+        { "name": "Deep Berry", "hex": "#8B0A50" }
+      ],
+      "category": "Tote Bags",
+      "description": "Modern tote with colorblock design.",
+      "details": ["Polished pebble leather", "Zip top", "Longer shoulder strap"],
+      "rating": 4.9,
+      "reviewCount": 89,
+      "isNew": true,
+      "isBestseller": true,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "12",
+      "name": "City Tote",
+      "slug": "city-tote",
+      "price": 350,
+      "images": ["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Tan", "hex": "#D2B48C" }
+      ],
+      "category": "Tote Bags",
+      "description": "Classic tote for work and weekend.",
+      "details": ["Crossgrain leather", "Open top", "Interior pockets"],
+      "rating": 4.6,
+      "reviewCount": 134,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "13",
+      "name": "Central Tote With Zip",
+      "slug": "central-tote-zip",
+      "price": 395,
+      "images": ["https://images.unsplash.com/photo-1614179689702-355944cd0918?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Chalk", "hex": "#F5F5DC" }
+      ],
+      "category": "Tote Bags",
+      "description": "Secure zip closure for everyday carry.",
+      "details": ["Pebble leather", "Full zip top", "Laptop sleeve"],
+      "rating": 4.7,
+      "reviewCount": 78,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "14",
+      "name": "Gallery Tote",
+      "slug": "gallery-tote",
+      "price": 328,
+      "originalPrice": 398,
+      "images": ["https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Khaki/Saddle", "hex": "#8B7355" },
+        { "name": "Brown/Black", "hex": "#3D2B1F" }
+      ],
+      "category": "Tote Bags",
+      "description": "Signature canvas with leather trim.",
+      "details": ["Signature coated canvas", "Leather handles", "Interior zip"],
+      "rating": 4.5,
+      "reviewCount": 167,
+      "isSale": true,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "15",
+      "name": "Mollie Tote",
+      "slug": "mollie-tote",
+      "price": 278,
+      "images": ["https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Taupe", "hex": "#483C32" },
+        { "name": "Red Apple", "hex": "#B22222" }
+      ],
+      "category": "Tote Bags",
+      "description": "Lightweight tote with feminine details.",
+      "details": ["Crossgrain leather", "Zip closure", "Wristlet included"],
+      "rating": 4.4,
+      "reviewCount": 93,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "16",
+      "name": "Rogue 25",
+      "slug": "rogue-25",
+      "price": 795,
+      "images": ["https://images.unsplash.com/photo-1575032617751-6ddec2089882?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Peacock", "hex": "#33A1C9" }
+      ],
+      "category": "Satchels",
+      "description": "Artisanal craftsmanship in colorblock.",
+      "details": ["Glovetanned leather", "Three compartments", "Turnlock closure"],
+      "rating": 4.9,
+      "reviewCount": 67,
+      "isNew": true,
+      "isBestseller": true,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "17",
+      "name": "Grace Bag",
+      "slug": "grace-bag",
+      "price": 595,
+      "images": ["https://images.unsplash.com/photo-1614179689702-355944cd0918?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Chalk", "hex": "#F5F5DC" }
+      ],
+      "category": "Satchels",
+      "description": "Structured elegance for special occasions.",
+      "details": ["Refined calf leather", "Kiss-lock frame", "Chain strap"],
+      "rating": 4.8,
+      "reviewCount": 45,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "18",
+      "name": "Ellie Satchel",
+      "slug": "ellie-satchel",
+      "price": 350,
+      "originalPrice": 450,
+      "images": ["https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Forest", "hex": "#228B22" },
+        { "name": "Vintage Mauve", "hex": "#B784A7" }
+      ],
+      "category": "Satchels",
+      "description": "Classic satchel with modern updates.",
+      "details": ["Pebble leather", "Dual handles", "Crossbody strap"],
+      "rating": 4.6,
+      "reviewCount": 112,
+      "isSale": true,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "19",
+      "name": "Charlie Bucket Bag",
+      "slug": "charlie-bucket-bag",
+      "price": 375,
+      "images": ["https://images.unsplash.com/photo-1591561954557-26941169b49e?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Black", "hex": "#000000" },
+        { "name": "Tan", "hex": "#D2B48C" },
+        { "name": "Chalk", "hex": "#F5F5DC" }
+      ],
+      "category": "Shoulder Bags",
+      "description": "Relaxed bucket style with drawstring.",
+      "details": ["Soft pebble leather", "Drawstring closure", "Removable pouch"],
+      "rating": 4.5,
+      "reviewCount": 78,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "20",
+      "name": "Teri Shoulder Bag",
+      "slug": "teri-shoulder-bag",
+      "price": 328,
+      "originalPrice": 450,
+      "images": ["https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=90&fit=crop"],
+      "colors": [
+        { "name": "Khaki/Saddle", "hex": "#8B7355" },
+        { "name": "Brown/Black", "hex": "#3D2B1F" },
+        { "name": "Chalk", "hex": "#F5F5DC" }
+      ],
+      "category": "Shoulder Bags",
+      "description": "Signature canvas with refined details.",
+      "details": ["Signature coated canvas", "Leather trim", "Adjustable strap"],
+      "rating": 4.8,
+      "reviewCount": 156,
+      "isSale": true,
+      "isBestseller": true,
+      "inStock": true,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "categories": [
+    { "id": "1", "name": "Shoulder Bags", "slug": "shoulder-bags", "image": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=90&fit=crop" },
+    { "id": "2", "name": "Tote Bags", "slug": "tote-bags", "image": "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=800&q=90&fit=crop" },
+    { "id": "3", "name": "Crossbody Bags", "slug": "crossbody-bags", "image": "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=800&q=90&fit=crop" },
+    { "id": "4", "name": "Satchels", "slug": "satchels", "image": "https://images.unsplash.com/photo-1575032617751-6ddec2089882?w=800&q=90&fit=crop" }
+  ]
+}

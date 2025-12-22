@@ -9,7 +9,11 @@ import {
   Store,
   Share2,
   ChevronRight,
-  ExternalLink
+  ExternalLink,
+  Package,
+  Plus,
+  Upload,
+  FolderOpen
 } from 'lucide-react';
 
 const navItems = [
@@ -17,6 +21,17 @@ const navItems = [
     name: 'Dashboard',
     href: '/admin',
     icon: LayoutDashboard,
+  },
+  {
+    name: 'Products',
+    href: '/admin/products',
+    icon: Package,
+    subItems: [
+      { name: 'All Products', href: '/admin/products', icon: Package },
+      { name: 'Add Product', href: '/admin/products/new', icon: Plus },
+      { name: 'Import CSV', href: '/admin/products/import', icon: Upload },
+      { name: 'Categories', href: '/admin/products/categories', icon: FolderOpen },
+    ],
   },
   {
     name: 'Integrations',
@@ -36,6 +51,15 @@ export default function AdminSidebar() {
   const isActive = (href: string) => {
     if (href === '/admin') return pathname === '/admin';
     return pathname.startsWith(href);
+  };
+
+  const isSubItemActive = (subHref: string, parentHref: string) => {
+    // For items that match the parent path exactly (like "All Products" -> "/admin/products")
+    if (subHref === parentHref) {
+      return pathname === subHref;
+    }
+    // For other subitems, check startsWith
+    return pathname.startsWith(subHref);
   };
 
   return (
@@ -122,27 +146,30 @@ export default function AdminSidebar() {
             {/* Sub Items */}
             {item.subItems && isActive(item.href) && (
               <div style={{ marginLeft: '32px', marginTop: '4px' }}>
-                {item.subItems.map((subItem) => (
-                  <Link
-                    key={subItem.name}
-                    href={subItem.href}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '10px',
-                      padding: '10px 16px',
-                      borderRadius: '8px',
-                      color: pathname === subItem.href ? '#fff' : '#6e6e73',
-                      backgroundColor: pathname === subItem.href ? 'rgba(255,255,255,0.06)' : 'transparent',
-                      textDecoration: 'none',
-                      fontSize: '13px',
-                      transition: 'all 0.2s'
-                    }}
-                  >
-                    <subItem.icon style={{ width: '16px', height: '16px' }} />
-                    {subItem.name}
-                  </Link>
-                ))}
+                {item.subItems.map((subItem) => {
+                  const active = isSubItemActive(subItem.href, item.href);
+                  return (
+                    <Link
+                      key={subItem.name}
+                      href={subItem.href}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '10px',
+                        padding: '10px 16px',
+                        borderRadius: '8px',
+                        color: active ? '#fff' : '#6e6e73',
+                        backgroundColor: active ? 'rgba(255,255,255,0.06)' : 'transparent',
+                        textDecoration: 'none',
+                        fontSize: '13px',
+                        transition: 'all 0.2s'
+                      }}
+                    >
+                      <subItem.icon style={{ width: '16px', height: '16px' }} />
+                      {subItem.name}
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>
