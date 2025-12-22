@@ -4,7 +4,7 @@ import Google from "next-auth/providers/google";
 // Define allowed admin emails - add your email(s) here
 const ALLOWED_ADMIN_EMAILS = [
   "joshb@surprisegranite.com",
-  // Add more authorized emails as needed
+  "help.remodely@gmail.com",
 ];
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
