@@ -1,6 +1,7 @@
 import Hero from '@/components/Hero';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import CategoryGrid from '@/components/CategoryGrid';
+import VideoShowcase from '@/components/VideoShowcase';
 import Link from 'next/link';
 import { Truck, RotateCcw, Shield, CreditCard } from 'lucide-react';
 
@@ -42,6 +43,9 @@ export default function Home() {
 
       {/* Categories */}
       <CategoryGrid />
+
+      {/* Video Showcase */}
+      <VideoShowcase />
 
       {/* Bestsellers */}
       <FeaturedProducts title="Bestsellers" filter="bestseller" limit={4} />
