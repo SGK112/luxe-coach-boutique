@@ -9,14 +9,12 @@ interface FeaturedProductsProps {
   title: string;
   filter?: 'all' | 'new' | 'bestseller' | 'sale';
   limit?: number;
-  showViewAll?: boolean;
 }
 
 export default function FeaturedProducts({
   title,
   filter = 'all',
   limit = 4,
-  showViewAll = true,
 }: FeaturedProductsProps) {
   const filteredProducts = products
     .filter((p) => {
@@ -28,26 +26,24 @@ export default function FeaturedProducts({
     .slice(0, limit);
 
   return (
-    <section className="py-16 md:py-20 bg-[#faf9f7]">
-      <div className="px-4 md:px-8 max-w-[1600px] mx-auto">
+    <section className="py-12 md:py-16">
+      <div className="w-full max-w-7xl mx-auto px-4">
         {/* Header */}
-        <div className="flex items-center justify-between mb-10 md:mb-12">
-          <h2 className="text-2xl md:text-3xl font-light tracking-wide">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-xl md:text-2xl font-light tracking-wide">
             {title}
           </h2>
-          {showViewAll && (
-            <Link
-              href={`/products${filter !== 'all' ? `?filter=${filter}` : ''}`}
-              className="flex items-center gap-1 text-xs tracking-[0.15em] uppercase font-medium hover:opacity-60 transition-opacity"
-            >
-              View All
-              <ChevronRight className="w-4 h-4" strokeWidth={1.5} />
-            </Link>
-          )}
+          <Link
+            href={`/products${filter !== 'all' ? `?filter=${filter}` : ''}`}
+            className="flex items-center gap-1 text-xs tracking-widest uppercase font-medium hover:text-gray-500 transition-colors"
+          >
+            View All
+            <ChevronRight className="w-4 h-4" />
+          </Link>
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {filteredProducts.map((product, index) => (
             <ProductCard
               key={product.id}

@@ -28,96 +28,72 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
     }
   };
 
-  const discount = product.originalPrice
-    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
-    : 0;
-
   return (
-    <Link href={`/product/${product.slug}`} className="group block">
-      {/* Image Container - Clean white background */}
-      <div className="relative aspect-square bg-white overflow-hidden">
+    <Link href={`/product/${product.slug}`} className="block group">
+      {/* Image */}
+      <div className="relative aspect-square bg-gray-100 overflow-hidden mb-3">
         <Image
           src={product.images[0]}
           alt={product.name}
           fill
-          className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           priority={priority}
         />
 
-        {/* Badge - Top Left, minimal */}
-        {(product.isNew || product.isBestseller || product.isSale) && (
-          <div className="absolute top-3 left-3">
-            {product.isNew && (
-              <span className="text-[10px] tracking-widest uppercase font-medium text-gray-700">
-                New
-              </span>
-            )}
-            {product.isBestseller && !product.isNew && (
-              <span className="text-[10px] tracking-widest uppercase font-medium text-gray-700">
-                Bestseller
-              </span>
-            )}
-            {product.isSale && !product.isNew && !product.isBestseller && (
-              <span className="text-[10px] tracking-widest uppercase font-medium text-red-600">
-                Sale
-              </span>
-            )}
-          </div>
+        {/* Badges */}
+        {product.isNew && (
+          <span className="absolute top-2 left-2 bg-black text-white text-[10px] px-2 py-1 uppercase tracking-wider">
+            New
+          </span>
+        )}
+        {product.isSale && (
+          <span className="absolute top-2 left-2 bg-red-600 text-white text-[10px] px-2 py-1 uppercase tracking-wider">
+            Sale
+          </span>
         )}
 
-        {/* Wishlist Button - Top Right */}
+        {/* Wishlist */}
         <button
           onClick={handleWishlistToggle}
-          className="absolute top-3 right-3 w-10 h-10 flex items-center justify-center rounded-full bg-white/80 hover:bg-white opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-sm"
+          className="absolute top-2 right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
           aria-label={inWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
         >
           <Heart
-            className={`w-5 h-5 transition-colors ${
-              inWishlist ? 'fill-black text-black' : 'text-gray-600'
-            }`}
-            strokeWidth={1.5}
+            className={`w-4 h-4 ${inWishlist ? 'fill-red-500 text-red-500' : 'text-gray-600'}`}
           />
         </button>
       </div>
 
-      {/* Product Info - Centered */}
-      <div className="pt-4 text-center">
-        {/* Color Swatches - Centered, larger */}
+      {/* Info */}
+      <div className="text-center px-1">
+        {/* Colors */}
         {product.colors.length > 1 && (
-          <div className="flex items-center justify-center gap-2 mb-3">
-            {product.colors.slice(0, 5).map((color, index) => (
+          <div className="flex justify-center gap-1.5 mb-2">
+            {product.colors.slice(0, 4).map((color) => (
               <div
                 key={color.name}
-                className={`w-5 h-5 rounded-full border-2 transition-transform hover:scale-110 ${
-                  index === 0 ? 'border-black' : 'border-gray-200'
-                }`}
+                className="w-4 h-4 rounded-full border border-gray-300"
                 style={{ backgroundColor: color.hex }}
                 title={color.name}
               />
             ))}
-            {product.colors.length > 5 && (
-              <span className="text-xs text-gray-500 ml-1">
-                +{product.colors.length - 5}
-              </span>
+            {product.colors.length > 4 && (
+              <span className="text-xs text-gray-500">+{product.colors.length - 4}</span>
             )}
           </div>
         )}
 
-        {/* Name - Centered */}
-        <h3 className="text-sm font-normal tracking-wide leading-tight mb-2 px-2">
-          {product.name}
-        </h3>
+        {/* Name */}
+        <h3 className="text-sm font-medium mb-1 line-clamp-2">{product.name}</h3>
 
-        {/* Price - Centered */}
+        {/* Price */}
         <div className="flex items-center justify-center gap-2">
-          <span className={`text-sm ${product.originalPrice ? 'text-red-600 font-medium' : 'font-medium'}`}>
-            ${product.price.toLocaleString()}
+          <span className={`text-sm font-medium ${product.originalPrice ? 'text-red-600' : ''}`}>
+            ${product.price}
           </span>
           {product.originalPrice && (
-            <span className="text-sm text-gray-400 line-through">
-              ${product.originalPrice.toLocaleString()}
-            </span>
+            <span className="text-sm text-gray-500 line-through">${product.originalPrice}</span>
           )}
         </div>
       </div>

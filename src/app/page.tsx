@@ -17,18 +17,13 @@ export default function Home() {
       <Hero />
 
       {/* Features Strip */}
-      <section className="bg-white border-b">
-        <div className="px-4 md:px-8 max-w-[1600px] mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 py-6 md:py-8 gap-4">
+      <section className="border-b">
+        <div className="w-full max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-6">
             {features.map((feature) => (
-              <div
-                key={feature.text}
-                className="flex items-center justify-center gap-3"
-              >
-                <feature.icon className="w-5 h-5 text-gray-600" strokeWidth={1.5} />
-                <span className="text-xs tracking-wide text-gray-700">
-                  {feature.text}
-                </span>
+              <div key={feature.text} className="flex items-center justify-center gap-2">
+                <feature.icon className="w-4 h-4 text-gray-600" />
+                <span className="text-xs text-gray-700">{feature.text}</span>
               </div>
             ))}
           </div>
@@ -36,52 +31,37 @@ export default function Home() {
       </section>
 
       {/* New Arrivals */}
-      <FeaturedProducts
-        title="New Arrivals"
-        filter="new"
-        limit={4}
-      />
+      <FeaturedProducts title="New Arrivals" filter="new" limit={4} />
 
       {/* Category Grid */}
       <CategoryGrid />
 
       {/* Bestsellers */}
-      <FeaturedProducts
-        title="Bestsellers"
-        filter="bestseller"
-        limit={4}
-      />
+      <FeaturedProducts title="Bestsellers" filter="bestseller" limit={4} />
 
       {/* Sale Banner */}
-      <section className="bg-[#1a1a1a] text-white">
-        <div className="px-4 md:px-8 py-16 md:py-24 max-w-[1600px] mx-auto">
-          <div className="max-w-2xl mx-auto text-center">
-            <span className="text-[11px] tracking-[0.3em] uppercase text-gray-400 block mb-4">
-              Limited Time Offer
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wide mb-6">
-              Holiday Sale
-            </h2>
-            <p className="text-gray-400 text-sm md:text-base mb-8 max-w-md mx-auto leading-relaxed">
-              Up to 40% off select designer handbags. The perfect gift awaits.
-            </p>
-            <Link
-              href="/products?filter=sale"
-              className="inline-flex items-center h-12 px-10 bg-white text-black text-xs tracking-[0.2em] uppercase font-medium hover:bg-gray-100 transition-colors"
-            >
-              Shop Sale
-            </Link>
-          </div>
+      <section className="bg-black text-white">
+        <div className="w-full max-w-7xl mx-auto px-4 py-16 md:py-20 text-center">
+          <span className="text-[11px] tracking-[0.3em] uppercase text-gray-400 block mb-3">
+            Limited Time
+          </span>
+          <h2 className="text-2xl md:text-4xl font-light tracking-wide mb-4">
+            Holiday Sale
+          </h2>
+          <p className="text-gray-400 text-sm mb-8 max-w-md mx-auto">
+            Up to 40% off select designer handbags. The perfect gift awaits.
+          </p>
+          <Link
+            href="/products?filter=sale"
+            className="inline-block bg-white text-black px-8 py-3 text-xs tracking-[0.15em] uppercase font-medium hover:bg-gray-100 transition-colors"
+          >
+            Shop Sale
+          </Link>
         </div>
       </section>
 
-      {/* All Products Preview */}
-      <FeaturedProducts
-        title="More to Explore"
-        filter="all"
-        limit={8}
-        showViewAll={true}
-      />
+      {/* More Products */}
+      <FeaturedProducts title="More to Explore" filter="all" limit={8} />
     </>
   );
 }
