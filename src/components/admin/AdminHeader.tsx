@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { LogOut, ChevronRight, User } from 'lucide-react';
@@ -7,6 +8,14 @@ import { LogOut, ChevronRight, User } from 'lucide-react';
 export default function AdminHeader() {
   const pathname = usePathname();
   const { data: session } = useSession();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleLogout = async () => {
     await signOut({ callbackUrl: '/admin/login' });
@@ -40,7 +49,7 @@ export default function AdminHeader() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: '0 32px',
+      padding: isMobile ? '0 16px 0 70px' : '0 32px',
       position: 'sticky',
       top: 0,
       zIndex: 10
@@ -49,17 +58,31 @@ export default function AdminHeader() {
       <nav style={{
         display: 'flex',
         alignItems: 'center',
-        gap: '8px'
+        gap: '8px',
+        overflow: 'hidden'
       }}>
         {breadcrumbs.map((crumb, index) => (
-          <div key={crumb.href} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div key={crumb.href} style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            minWidth: 0
+          }}>
             {index > 0 && (
-              <ChevronRight style={{ width: '14px', height: '14px', color: '#d4d4d4' }} />
+              <ChevronRight style={{
+                width: '14px',
+                height: '14px',
+                color: '#d4d4d4',
+                flexShrink: 0
+              }} />
             )}
             <span style={{
-              fontSize: '14px',
+              fontSize: isMobile ? '13px' : '14px',
               color: index === breadcrumbs.length - 1 ? '#1d1d1f' : '#86868b',
-              fontWeight: index === breadcrumbs.length - 1 ? 500 : 400
+              fontWeight: index === breadcrumbs.length - 1 ? 500 : 400,
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
             }}>
               {crumb.name}
             </span>
@@ -68,8 +91,8 @@ export default function AdminHeader() {
       </nav>
 
       {/* User Info & Logout */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        {session?.user && (
+      <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '8px' : '16px' }}>
+        {session?.user && !isMobile && (
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             {session.user.image ? (
               <img
@@ -106,20 +129,21 @@ export default function AdminHeader() {
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            padding: '10px 20px',
+            padding: isMobile ? '8px 12px' : '10px 20px',
             backgroundColor: '#f5f5f5',
             border: 'none',
             borderRadius: '20px',
             fontSize: '13px',
             color: '#1d1d1f',
             cursor: 'pointer',
-            transition: 'background-color 0.2s'
+            transition: 'background-color 0.2s',
+            whiteSpace: 'nowrap'
           }}
           onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#e8e8e8'}
           onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
         >
           <LogOut style={{ width: '16px', height: '16px' }} />
-          Logout
+          {!isMobile && 'Logout'}
         </button>
       </div>
     </header>

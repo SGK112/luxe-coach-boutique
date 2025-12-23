@@ -2,6 +2,7 @@
 
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminHeader from '@/components/admin/AdminHeader';
+import AdminContentWrapper from '@/components/admin/AdminContentWrapper';
 import IntegrationCard from '@/components/admin/IntegrationCard';
 import { ShoppingBag, Store, Share2, TrendingUp, Package, Users } from 'lucide-react';
 
@@ -17,22 +18,22 @@ export default function AdminDashboardPage() {
     <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#fafafa' }}>
       <AdminSidebar />
 
-      <div style={{ flex: 1, marginLeft: '260px' }}>
+      <AdminContentWrapper>
         <AdminHeader />
 
-        <main style={{ padding: '32px' }}>
+        <main style={{ padding: '24px 16px' }} className="admin-main">
           {/* Welcome Section */}
-          <div style={{ marginBottom: '40px' }}>
+          <div style={{ marginBottom: '32px' }}>
             <h1 style={{
               fontFamily: 'var(--font-playfair), Georgia, serif',
-              fontSize: '32px',
+              fontSize: 'clamp(24px, 5vw, 32px)',
               fontWeight: 400,
               color: '#1d1d1f',
               marginBottom: '8px'
             }}>
               Welcome back
             </h1>
-            <p style={{ fontSize: '15px', color: '#86868b' }}>
+            <p style={{ fontSize: '14px', color: '#86868b' }}>
               {today}
             </p>
           </div>
@@ -40,9 +41,9 @@ export default function AdminDashboardPage() {
           {/* Quick Stats */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '20px',
-            marginBottom: '48px'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+            gap: '16px',
+            marginBottom: '40px'
           }}>
             {[
               { label: 'Total Products', value: '20', icon: Package, trend: '+2 this week' },
@@ -54,7 +55,7 @@ export default function AdminDashboardPage() {
                 style={{
                   backgroundColor: '#fff',
                   borderRadius: '16px',
-                  padding: '24px',
+                  padding: '20px',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
                   border: '1px solid #f0f0f0'
                 }}
@@ -63,30 +64,30 @@ export default function AdminDashboardPage() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  marginBottom: '16px'
+                  marginBottom: '12px'
                 }}>
-                  <span style={{ fontSize: '14px', color: '#86868b' }}>{stat.label}</span>
+                  <span style={{ fontSize: '13px', color: '#86868b' }}>{stat.label}</span>
                   <div style={{
-                    width: '36px',
-                    height: '36px',
-                    borderRadius: '10px',
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: '8px',
                     backgroundColor: '#f5f5f5',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center'
                   }}>
-                    <stat.icon style={{ width: '18px', height: '18px', color: '#6e6e73' }} />
+                    <stat.icon style={{ width: '16px', height: '16px', color: '#6e6e73' }} />
                   </div>
                 </div>
                 <div style={{
-                  fontSize: '28px',
+                  fontSize: '24px',
                   fontWeight: 600,
                   color: '#1d1d1f',
                   marginBottom: '4px'
                 }}>
                   {stat.value}
                 </div>
-                <div style={{ fontSize: '12px', color: '#86868b' }}>
+                <div style={{ fontSize: '11px', color: '#86868b' }}>
                   {stat.trend}
                 </div>
               </div>
@@ -96,18 +97,18 @@ export default function AdminDashboardPage() {
           {/* Integrations Section */}
           <div>
             <h2 style={{
-              fontSize: '20px',
+              fontSize: '18px',
               fontWeight: 600,
               color: '#1d1d1f',
-              marginBottom: '24px'
+              marginBottom: '20px'
             }}>
               Integrations
             </h2>
 
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '24px'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '16px'
             }}>
               <IntegrationCard
                 title="eBay"
@@ -135,7 +136,15 @@ export default function AdminDashboardPage() {
             </div>
           </div>
         </main>
-      </div>
+      </AdminContentWrapper>
+
+      <style jsx global>{`
+        @media (min-width: 768px) {
+          .admin-main {
+            padding: 32px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

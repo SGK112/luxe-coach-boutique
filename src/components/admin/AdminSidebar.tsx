@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -13,7 +14,9 @@ import {
   Package,
   Plus,
   Upload,
-  FolderOpen
+  FolderOpen,
+  Menu,
+  X
 } from 'lucide-react';
 
 const navItems = [
@@ -47,6 +50,25 @@ const navItems = [
 
 export default function AdminSidebar() {
   const pathname = usePathname();
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileOpen]);
+
+  // Close menu on route change
+  useEffect(() => {
+    setIsMobileOpen(false);
+  }, [pathname]);
 
   const isActive = (href: string) => {
     if (href === '/admin') return pathname === '/admin';
@@ -54,25 +76,14 @@ export default function AdminSidebar() {
   };
 
   const isSubItemActive = (subHref: string, parentHref: string) => {
-    // For items that match the parent path exactly (like "All Products" -> "/admin/products")
     if (subHref === parentHref) {
       return pathname === subHref;
     }
-    // For other subitems, check startsWith
     return pathname.startsWith(subHref);
   };
 
-  return (
-    <aside style={{
-      width: '260px',
-      backgroundColor: '#1d1d1f',
-      minHeight: '100vh',
-      padding: '24px 0',
-      position: 'fixed',
-      left: 0,
-      top: 0,
-      overflowY: 'auto'
-    }}>
+  const SidebarContent = () => (
+    <>
       {/* Logo */}
       <div style={{
         padding: '0 24px 32px',
@@ -112,7 +123,7 @@ export default function AdminSidebar() {
       </div>
 
       {/* Navigation */}
-      <nav style={{ padding: '24px 12px' }}>
+      <nav style={{ padding: '24px 12px', flex: 1 }}>
         {navItems.map((item) => (
           <div key={item.name}>
             <Link
@@ -178,12 +189,9 @@ export default function AdminSidebar() {
 
       {/* Back to Store */}
       <div style={{
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
         padding: '20px 24px',
-        borderTop: '1px solid rgba(255,255,255,0.08)'
+        borderTop: '1px solid rgba(255,255,255,0.08)',
+        marginTop: 'auto'
       }}>
         <Link
           href="/"
@@ -201,6 +209,117 @@ export default function AdminSidebar() {
           View Store
         </Link>
       </div>
-    </aside>
+    </>
+  );
+
+  return (
+    <>
+      {/* Mobile Menu Button */}
+      {isMobile && (
+        <button
+          onClick={() => setIsMobileOpen(true)}
+          style={{
+            position: 'fixed',
+            top: '16px',
+            left: '16px',
+            zIndex: 40,
+            width: '44px',
+            height: '44px',
+            borderRadius: '12px',
+            backgroundColor: '#1d1d1f',
+            border: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+          }}
+          aria-label="Open menu"
+        >
+          <Menu style={{ width: '20px', height: '20px', color: '#fff' }} />
+        </button>
+      )}
+
+      {/* Desktop Sidebar */}
+      {!isMobile && (
+        <aside style={{
+          width: '260px',
+          backgroundColor: '#1d1d1f',
+          minHeight: '100vh',
+          padding: '24px 0',
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          overflowY: 'auto'
+        }}>
+          <SidebarContent />
+        </aside>
+      )}
+
+      {/* Mobile Sidebar Overlay */}
+      {isMobile && isMobileOpen && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 50 }}>
+          {/* Backdrop */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              backgroundColor: 'rgba(0,0,0,0.5)',
+              backdropFilter: 'blur(4px)'
+            }}
+            onClick={() => setIsMobileOpen(false)}
+          />
+
+          {/* Sidebar */}
+          <aside style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            width: '280px',
+            maxWidth: '85%',
+            backgroundColor: '#1d1d1f',
+            padding: '24px 0',
+            display: 'flex',
+            flexDirection: 'column',
+            boxShadow: '4px 0 20px rgba(0,0,0,0.3)',
+            animation: 'slideInLeft 0.3s ease-out'
+          }}>
+            {/* Close Button */}
+            <button
+              onClick={() => setIsMobileOpen(false)}
+              style={{
+                position: 'absolute',
+                top: '16px',
+                right: '16px',
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(255,255,255,0.1)',
+                border: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer'
+              }}
+              aria-label="Close menu"
+            >
+              <X style={{ width: '18px', height: '18px', color: '#fff' }} />
+            </button>
+
+            <SidebarContent />
+          </aside>
+        </div>
+      )}
+
+      <style jsx global>{`
+        @keyframes slideInLeft {
+          from { transform: translateX(-100%); }
+          to { transform: translateX(0); }
+        }
+      `}</style>
+    </>
   );
 }

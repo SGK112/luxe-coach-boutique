@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminHeader from '@/components/admin/AdminHeader';
+import AdminContentWrapper from '@/components/admin/AdminContentWrapper';
 import ProductTable from '@/components/admin/ProductTable';
 import DeleteConfirmModal from '@/components/admin/DeleteConfirmModal';
 import { Product } from '@/types';
@@ -127,10 +128,10 @@ export default function AdminProductsPage() {
     <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
       <AdminSidebar />
 
-      <div style={{ flex: 1, marginLeft: '260px' }}>
+      <AdminContentWrapper>
         <AdminHeader />
 
-        <main style={{ padding: '32px 40px' }}>
+        <main style={{ padding: '24px 16px' }} className="admin-main-wide">
           {/* Page Header */}
           <div style={{
             display: 'flex',
@@ -454,7 +455,7 @@ export default function AdminProductsPage() {
             </div>
           )}
         </main>
-      </div>
+      </AdminContentWrapper>
 
       {/* Delete Modal */}
       <DeleteConfirmModal
@@ -470,6 +471,11 @@ export default function AdminProductsPage() {
         @keyframes spin {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
+        }
+        @media (min-width: 768px) {
+          .admin-main-wide {
+            padding: 32px 40px !important;
+          }
         }
       `}</style>
     </div>

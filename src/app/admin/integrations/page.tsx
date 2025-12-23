@@ -2,6 +2,7 @@
 
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminHeader from '@/components/admin/AdminHeader';
+import AdminContentWrapper from '@/components/admin/AdminContentWrapper';
 import IntegrationCard from '@/components/admin/IntegrationCard';
 import { ShoppingBag, Store, Share2 } from 'lucide-react';
 
@@ -10,10 +11,10 @@ export default function IntegrationsPage() {
     <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#fafafa' }}>
       <AdminSidebar />
 
-      <div style={{ flex: 1, marginLeft: '260px' }}>
+      <AdminContentWrapper>
         <AdminHeader />
 
-        <main style={{ padding: '32px' }}>
+        <main style={{ padding: '24px 16px' }} className="admin-main">
           {/* Page Header */}
           <div style={{ marginBottom: '40px' }}>
             <h1 style={{
@@ -94,7 +95,15 @@ export default function IntegrationsPage() {
             </div>
           </div>
         </main>
-      </div>
+      </AdminContentWrapper>
+
+      <style jsx global>{`
+        @media (min-width: 768px) {
+          .admin-main {
+            padding: 32px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

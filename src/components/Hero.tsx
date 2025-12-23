@@ -38,6 +38,14 @@ const slides = [
 export default function Hero() {
   const [current, setCurrent] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -68,8 +76,8 @@ export default function Hero() {
     <section style={{
       position: 'relative',
       width: '100%',
-      height: '90vh',
-      minHeight: '600px',
+      height: isMobile ? '70vh' : '90vh',
+      minHeight: isMobile ? '500px' : '600px',
       maxHeight: '1000px',
       backgroundColor: '#0a0a0a',
       overflow: 'hidden'
@@ -107,27 +115,31 @@ export default function Hero() {
         background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)'
       }} />
 
-      {/* Decorative Elements */}
-      <div style={{
-        position: 'absolute',
-        top: '10%',
-        left: '5%',
-        width: '150px',
-        height: '150px',
-        border: '1px solid rgba(255,255,255,0.1)',
-        borderRadius: '50%',
-        opacity: 0.5
-      }} />
-      <div style={{
-        position: 'absolute',
-        bottom: '15%',
-        right: '8%',
-        width: '100px',
-        height: '100px',
-        border: '1px solid rgba(255,255,255,0.08)',
-        borderRadius: '50%',
-        opacity: 0.5
-      }} />
+      {/* Decorative Elements - Hidden on mobile */}
+      {!isMobile && (
+        <>
+          <div style={{
+            position: 'absolute',
+            top: '10%',
+            left: '5%',
+            width: '150px',
+            height: '150px',
+            border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: '50%',
+            opacity: 0.5
+          }} />
+          <div style={{
+            position: 'absolute',
+            bottom: '15%',
+            right: '8%',
+            width: '100px',
+            height: '100px',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: '50%',
+            opacity: 0.5
+          }} />
+        </>
+      )}
 
       {/* Main Content */}
       <div style={{
@@ -138,7 +150,7 @@ export default function Hero() {
         justifyContent: 'center',
         textAlign: 'center',
         color: '#fff',
-        padding: '0 24px'
+        padding: '0 20px'
       }}>
         <div style={{
           maxWidth: '800px',
@@ -151,15 +163,15 @@ export default function Hero() {
             width: '60px',
             height: '2px',
             background: `linear-gradient(90deg, ${slide.accent}, transparent)`,
-            margin: '0 auto 24px'
+            margin: '0 auto 20px'
           }} />
 
           {/* Subtitle */}
           <p style={{
-            fontSize: '14px',
-            letterSpacing: '0.4em',
+            fontSize: isMobile ? '12px' : '14px',
+            letterSpacing: '0.3em',
             textTransform: 'uppercase',
-            marginBottom: '20px',
+            marginBottom: '16px',
             opacity: 0.85,
             fontWeight: 400
           }}>
@@ -169,10 +181,10 @@ export default function Hero() {
           {/* Title */}
           <h1 style={{
             fontFamily: 'var(--font-playfair), Georgia, serif',
-            fontSize: 'clamp(40px, 8vw, 72px)',
+            fontSize: isMobile ? '32px' : 'clamp(40px, 8vw, 72px)',
             fontWeight: 400,
             letterSpacing: '0.02em',
-            marginBottom: '40px',
+            marginBottom: isMobile ? '28px' : '40px',
             lineHeight: 1.1,
             textShadow: '0 4px 30px rgba(0,0,0,0.3)'
           }}>
@@ -185,11 +197,11 @@ export default function Hero() {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '12px',
+              gap: '10px',
               backgroundColor: '#fff',
               color: '#1d1d1f',
-              padding: '20px 48px',
-              fontSize: '12px',
+              padding: isMobile ? '16px 36px' : '20px 48px',
+              fontSize: isMobile ? '11px' : '12px',
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
               fontWeight: 600,
@@ -209,11 +221,11 @@ export default function Hero() {
         onClick={handlePrev}
         style={{
           position: 'absolute',
-          left: '24px',
+          left: isMobile ? '12px' : '24px',
           top: '50%',
           transform: 'translateY(-50%)',
-          width: '56px',
-          height: '56px',
+          width: isMobile ? '44px' : '56px',
+          height: isMobile ? '44px' : '56px',
           borderRadius: '50%',
           backgroundColor: 'rgba(255,255,255,0.1)',
           backdropFilter: 'blur(10px)',
@@ -228,17 +240,17 @@ export default function Hero() {
         }}
         aria-label="Previous slide"
       >
-        <ChevronLeft style={{ width: '24px', height: '24px' }} />
+        <ChevronLeft style={{ width: isMobile ? '20px' : '24px', height: isMobile ? '20px' : '24px' }} />
       </button>
       <button
         onClick={handleNext}
         style={{
           position: 'absolute',
-          right: '24px',
+          right: isMobile ? '12px' : '24px',
           top: '50%',
           transform: 'translateY(-50%)',
-          width: '56px',
-          height: '56px',
+          width: isMobile ? '44px' : '56px',
+          height: isMobile ? '44px' : '56px',
           borderRadius: '50%',
           backgroundColor: 'rgba(255,255,255,0.1)',
           backdropFilter: 'blur(10px)',
@@ -253,18 +265,18 @@ export default function Hero() {
         }}
         aria-label="Next slide"
       >
-        <ChevronRight style={{ width: '24px', height: '24px' }} />
+        <ChevronRight style={{ width: isMobile ? '20px' : '24px', height: isMobile ? '20px' : '24px' }} />
       </button>
 
       {/* Progress Indicators */}
       <div style={{
         position: 'absolute',
-        bottom: '48px',
+        bottom: isMobile ? '24px' : '48px',
         left: '50%',
         transform: 'translateX(-50%)',
         display: 'flex',
         alignItems: 'center',
-        gap: '16px'
+        gap: isMobile ? '12px' : '16px'
       }}>
         {slides.map((s, i) => (
           <button
@@ -277,7 +289,7 @@ export default function Hero() {
               }, 300);
             }}
             style={{
-              width: i === current ? '48px' : '12px',
+              width: i === current ? (isMobile ? '36px' : '48px') : '12px',
               height: '4px',
               backgroundColor: i === current ? '#fff' : 'rgba(255,255,255,0.3)',
               border: 'none',
@@ -304,65 +316,69 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Slide Counter */}
-      <div style={{
-        position: 'absolute',
-        bottom: '48px',
-        right: '48px',
-        display: 'flex',
-        alignItems: 'baseline',
-        gap: '4px',
-        color: '#fff',
-        fontFamily: 'var(--font-playfair), Georgia, serif'
-      }}>
-        <span style={{ fontSize: '24px', fontWeight: 400 }}>
-          {String(current + 1).padStart(2, '0')}
-        </span>
-        <span style={{ fontSize: '14px', opacity: 0.5 }}>/</span>
-        <span style={{ fontSize: '14px', opacity: 0.5 }}>
-          {String(slides.length).padStart(2, '0')}
-        </span>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div style={{
-        position: 'absolute',
-        bottom: '48px',
-        left: '48px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '8px',
-        color: '#fff',
-        opacity: 0.6
-      }}>
-        <span style={{
-          fontSize: '10px',
-          letterSpacing: '0.2em',
-          textTransform: 'uppercase',
-          writingMode: 'vertical-rl',
-          transform: 'rotate(180deg)'
-        }}>
-          Scroll
-        </span>
+      {/* Slide Counter - Hidden on mobile */}
+      {!isMobile && (
         <div style={{
-          width: '1px',
-          height: '40px',
-          backgroundColor: 'rgba(255,255,255,0.3)',
-          position: 'relative',
-          overflow: 'hidden'
+          position: 'absolute',
+          bottom: '48px',
+          right: '48px',
+          display: 'flex',
+          alignItems: 'baseline',
+          gap: '4px',
+          color: '#fff',
+          fontFamily: 'var(--font-playfair), Georgia, serif'
         }}>
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '50%',
-            backgroundColor: '#fff',
-            animation: 'scrollLine 2s ease-in-out infinite'
-          }} />
+          <span style={{ fontSize: '24px', fontWeight: 400 }}>
+            {String(current + 1).padStart(2, '0')}
+          </span>
+          <span style={{ fontSize: '14px', opacity: 0.5 }}>/</span>
+          <span style={{ fontSize: '14px', opacity: 0.5 }}>
+            {String(slides.length).padStart(2, '0')}
+          </span>
         </div>
-      </div>
+      )}
+
+      {/* Scroll Indicator - Hidden on mobile */}
+      {!isMobile && (
+        <div style={{
+          position: 'absolute',
+          bottom: '48px',
+          left: '48px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '8px',
+          color: '#fff',
+          opacity: 0.6
+        }}>
+          <span style={{
+            fontSize: '10px',
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            writingMode: 'vertical-rl',
+            transform: 'rotate(180deg)'
+          }}>
+            Scroll
+          </span>
+          <div style={{
+            width: '1px',
+            height: '40px',
+            backgroundColor: 'rgba(255,255,255,0.3)',
+            position: 'relative',
+            overflow: 'hidden'
+          }}>
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '50%',
+              backgroundColor: '#fff',
+              animation: 'scrollLine 2s ease-in-out infinite'
+            }} />
+          </div>
+        </div>
+      )}
 
       <style jsx global>{`
         @keyframes kenBurns {
