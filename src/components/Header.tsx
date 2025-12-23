@@ -178,26 +178,26 @@ export default function Header() {
             }}>
               <span style={{
                 fontFamily: 'var(--font-playfair), Georgia, serif',
-                fontSize: '32px',
-                letterSpacing: '0.12em',
+                fontSize: '28px',
+                letterSpacing: '0.1em',
                 textTransform: 'uppercase',
                 fontWeight: 400,
                 color: '#1d1d1f',
                 display: 'block',
                 lineHeight: 1
               }}>
-                COACH
+                2wenty3
               </span>
               <span style={{
                 fontSize: '9px',
-                letterSpacing: '0.35em',
+                letterSpacing: '0.3em',
                 textTransform: 'uppercase',
                 color: '#86868b',
                 fontWeight: 500,
                 marginTop: '4px',
                 display: 'block'
               }}>
-                Luxe Boutique
+                LLC
               </span>
             </Link>
 
@@ -329,20 +329,20 @@ export default function Header() {
               <div>
                 <span style={{
                   fontFamily: 'var(--font-playfair), Georgia, serif',
-                  fontSize: '22px',
+                  fontSize: '20px',
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
                   display: 'block'
                 }}>
-                  COACH
+                  2wenty3
                 </span>
                 <span style={{
                   fontSize: '8px',
-                  letterSpacing: '0.3em',
+                  letterSpacing: '0.25em',
                   textTransform: 'uppercase',
                   color: '#86868b'
                 }}>
-                  Luxe Boutique
+                  LLC
                 </span>
               </div>
               <IconButton onClick={() => setIsMobileMenuOpen(false)} ariaLabel="Close">

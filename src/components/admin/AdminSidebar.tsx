@@ -51,17 +51,26 @@ const navItems = [
 export default function AdminSidebar() {
   const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(1024); // Default to desktop
+  const [mounted, setMounted] = useState(false);
+
+  const isMobile = windowWidth < 1024;
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    setMounted(true);
+    setWindowWidth(window.innerWidth);
+
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isMobileOpen ? 'hidden' : '';
+    if (isMobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
     return () => { document.body.style.overflow = ''; };
   }, [isMobileOpen]);
 
@@ -92,21 +101,21 @@ export default function AdminSidebar() {
         <Link href="/admin" style={{ textDecoration: 'none' }}>
           <span style={{
             fontFamily: 'var(--font-playfair), Georgia, serif',
-            fontSize: '20px',
+            fontSize: '18px',
             color: '#fff',
-            letterSpacing: '0.15em',
+            letterSpacing: '0.1em',
             textTransform: 'uppercase',
             display: 'block'
           }}>
-            COACH
+            2wenty3
           </span>
           <span style={{
             fontSize: '10px',
             color: '#a1a1a6',
-            letterSpacing: '0.2em',
+            letterSpacing: '0.15em',
             textTransform: 'uppercase'
           }}>
-            Luxe Boutique
+            LLC
           </span>
         </Link>
         <span style={{
@@ -123,16 +132,17 @@ export default function AdminSidebar() {
       </div>
 
       {/* Navigation */}
-      <nav style={{ padding: '24px 12px', flex: 1 }}>
+      <nav style={{ padding: '24px 12px', flex: 1, overflowY: 'auto' }}>
         {navItems.map((item) => (
           <div key={item.name}>
             <Link
               href={item.href}
+              onClick={() => isMobile && !item.subItems && setIsMobileOpen(false)}
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '12px',
-                padding: '12px 16px',
+                padding: '14px 16px',
                 borderRadius: '10px',
                 color: isActive(item.href) ? '#fff' : '#a1a1a6',
                 backgroundColor: isActive(item.href) && !item.subItems ? 'rgba(255,255,255,0.08)' : 'transparent',
@@ -142,32 +152,34 @@ export default function AdminSidebar() {
                 transition: 'all 0.2s'
               }}
             >
-              <item.icon style={{ width: '20px', height: '20px' }} />
+              <item.icon style={{ width: '20px', height: '20px', flexShrink: 0 }} />
               <span style={{ flex: 1 }}>{item.name}</span>
               {item.subItems && (
                 <ChevronRight style={{
                   width: '16px',
                   height: '16px',
                   transform: isActive(item.href) ? 'rotate(90deg)' : 'none',
-                  transition: 'transform 0.2s'
+                  transition: 'transform 0.2s',
+                  flexShrink: 0
                 }} />
               )}
             </Link>
 
             {/* Sub Items */}
             {item.subItems && isActive(item.href) && (
-              <div style={{ marginLeft: '32px', marginTop: '4px' }}>
+              <div style={{ marginLeft: '20px', marginTop: '4px' }}>
                 {item.subItems.map((subItem) => {
                   const active = isSubItemActive(subItem.href, item.href);
                   return (
                     <Link
                       key={subItem.name}
                       href={subItem.href}
+                      onClick={() => isMobile && setIsMobileOpen(false)}
                       style={{
                         display: 'flex',
                         alignItems: 'center',
                         gap: '10px',
-                        padding: '10px 16px',
+                        padding: '12px 16px',
                         borderRadius: '8px',
                         color: active ? '#fff' : '#6e6e73',
                         backgroundColor: active ? 'rgba(255,255,255,0.06)' : 'transparent',
@@ -176,7 +188,7 @@ export default function AdminSidebar() {
                         transition: 'all 0.2s'
                       }}
                     >
-                      <subItem.icon style={{ width: '16px', height: '16px' }} />
+                      <subItem.icon style={{ width: '16px', height: '16px', flexShrink: 0 }} />
                       {subItem.name}
                     </Link>
                   );
@@ -212,19 +224,39 @@ export default function AdminSidebar() {
     </>
   );
 
+  // Don't render mobile button until mounted to avoid hydration mismatch
+  if (!mounted) {
+    return (
+      <aside style={{
+        width: '260px',
+        backgroundColor: '#1d1d1f',
+        minHeight: '100vh',
+        padding: '24px 0',
+        position: 'fixed',
+        left: 0,
+        top: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        overflowY: 'auto'
+      }}>
+        <SidebarContent />
+      </aside>
+    );
+  }
+
   return (
     <>
-      {/* Mobile Menu Button */}
-      {isMobile && (
+      {/* Mobile Menu Button - Always visible on mobile */}
+      {isMobile && !isMobileOpen && (
         <button
           onClick={() => setIsMobileOpen(true)}
           style={{
             position: 'fixed',
-            top: '16px',
-            left: '16px',
-            zIndex: 40,
-            width: '44px',
-            height: '44px',
+            top: '12px',
+            left: '12px',
+            zIndex: 45,
+            width: '48px',
+            height: '48px',
             borderRadius: '12px',
             backgroundColor: '#1d1d1f',
             border: 'none',
@@ -232,11 +264,11 @@ export default function AdminSidebar() {
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+            boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
           }}
           aria-label="Open menu"
         >
-          <Menu style={{ width: '20px', height: '20px', color: '#fff' }} />
+          <Menu style={{ width: '22px', height: '22px', color: '#fff' }} />
         </button>
       )}
 
@@ -252,7 +284,8 @@ export default function AdminSidebar() {
           top: 0,
           display: 'flex',
           flexDirection: 'column',
-          overflowY: 'auto'
+          overflowY: 'auto',
+          zIndex: 30
         }}>
           <SidebarContent />
         </aside>
@@ -266,8 +299,9 @@ export default function AdminSidebar() {
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundColor: 'rgba(0,0,0,0.5)',
-              backdropFilter: 'blur(4px)'
+              backgroundColor: 'rgba(0,0,0,0.6)',
+              backdropFilter: 'blur(4px)',
+              WebkitBackdropFilter: 'blur(4px)'
             }}
             onClick={() => setIsMobileOpen(false)}
           />
@@ -278,35 +312,37 @@ export default function AdminSidebar() {
             top: 0,
             bottom: 0,
             left: 0,
-            width: '280px',
-            maxWidth: '85%',
+            width: '300px',
+            maxWidth: '85vw',
             backgroundColor: '#1d1d1f',
             padding: '24px 0',
             display: 'flex',
             flexDirection: 'column',
-            boxShadow: '4px 0 20px rgba(0,0,0,0.3)',
-            animation: 'slideInLeft 0.3s ease-out'
+            boxShadow: '4px 0 24px rgba(0,0,0,0.4)',
+            transform: 'translateX(0)',
+            animation: 'slideInLeft 0.25s ease-out'
           }}>
             {/* Close Button */}
             <button
               onClick={() => setIsMobileOpen(false)}
               style={{
                 position: 'absolute',
-                top: '16px',
-                right: '16px',
-                width: '36px',
-                height: '36px',
+                top: '12px',
+                right: '12px',
+                width: '40px',
+                height: '40px',
                 borderRadius: '50%',
                 backgroundColor: 'rgba(255,255,255,0.1)',
                 border: 'none',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                zIndex: 10
               }}
               aria-label="Close menu"
             >
-              <X style={{ width: '18px', height: '18px', color: '#fff' }} />
+              <X style={{ width: '20px', height: '20px', color: '#fff' }} />
             </button>
 
             <SidebarContent />

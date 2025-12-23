@@ -17,15 +17,15 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "COACH | Luxury Designer Handbags",
-  description: "Shop the finest designer Coach handbags. Discover shoulder bags, totes, crossbody bags, and more. Free shipping on orders over $150.",
-  keywords: "Coach handbags, designer bags, women's purses, luxury handbags, shoulder bags, totes, crossbody bags",
+  title: "2wenty3 | Premium Designer Handbags",
+  description: "Shop premium designer handbags at 2wenty3 LLC. Discover shoulder bags, totes, crossbody bags, and more. Free shipping on orders over $150.",
+  keywords: "designer handbags, women's purses, luxury handbags, shoulder bags, totes, crossbody bags, 2wenty3",
   openGraph: {
-    title: "COACH | Luxury Designer Handbags",
-    description: "Shop the finest designer Coach handbags",
+    title: "2wenty3 | Premium Designer Handbags",
+    description: "Shop premium designer handbags at 2wenty3 LLC",
     type: "website",
     locale: "en_US",
-    siteName: "COACH",
+    siteName: "2wenty3",
   },
 };
 

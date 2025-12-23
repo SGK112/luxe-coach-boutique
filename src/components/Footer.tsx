@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Instagram, Facebook, Twitter } from 'lucide-react';
+import { Instagram, Facebook, Twitter, Mail } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -18,12 +18,12 @@ export default function Footer() {
           {/* Brand */}
           <Link href="/" style={{
             fontFamily: 'var(--font-playfair), Georgia, serif',
-            fontSize: '20px',
-            letterSpacing: '0.2em',
+            fontSize: '22px',
+            letterSpacing: '0.15em',
             textTransform: 'uppercase',
             fontWeight: 400
           }}>
-            COACH
+            2wenty3
           </Link>
 
           {/* Navigation Links - Single Row */}
@@ -52,6 +52,21 @@ export default function Footer() {
               </Link>
             ))}
           </nav>
+
+          {/* Contact Email */}
+          <a
+            href="mailto:2wenty3llc@gmail.com"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontSize: '13px',
+              color: '#a1a1a6'
+            }}
+          >
+            <Mail style={{ width: '14px', height: '14px' }} />
+            2wenty3llc@gmail.com
+          </a>
 
           {/* Social Icons */}
           <div style={{ display: 'flex', gap: '16px' }}>
@@ -87,7 +102,7 @@ export default function Footer() {
             maxWidth: '400px'
           }}>
             <span style={{ fontSize: '11px', color: '#6e6e73' }}>
-              &copy; {new Date().getFullYear()} Coach
+              &copy; {new Date().getFullYear()} 2wenty3 LLC
             </span>
             <Link href="/privacy" style={{ fontSize: '11px', color: '#6e6e73' }}>Privacy</Link>
             <Link href="/terms" style={{ fontSize: '11px', color: '#6e6e73' }}>Terms</Link>

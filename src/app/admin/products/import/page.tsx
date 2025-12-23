@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminHeader from '@/components/admin/AdminHeader';
+import AdminContentWrapper from '@/components/admin/AdminContentWrapper';
 import { Upload, Download, FileText, Check, AlertCircle, ArrowRight, X } from 'lucide-react';
 
 interface ParseError {
@@ -66,10 +67,10 @@ export default function ImportProductsPage() {
     <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
       <AdminSidebar />
 
-      <div style={{ flex: 1, marginLeft: '260px' }}>
+      <AdminContentWrapper>
         <AdminHeader />
 
-        <main style={{ padding: '32px 40px', maxWidth: '800px' }}>
+        <main style={{ padding: '20px 16px', maxWidth: '800px' }} className="admin-main">
           {/* Page Header */}
           <div style={{
             display: 'flex',
@@ -455,12 +456,17 @@ export default function ImportProductsPage() {
             </div>
           )}
         </main>
-      </div>
+      </AdminContentWrapper>
 
       <style jsx global>{`
         @keyframes spin {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
+        }
+        @media (min-width: 768px) {
+          .admin-main {
+            padding: 32px 40px !important;
+          }
         }
       `}</style>
     </div>
